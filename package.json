@@ -12,7 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "classnames": "^2.3.2",
     "framer-motion": "^10.12.16",
+    "material-colors": "^1.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
@@ -20,6 +22,7 @@
     "sass": "^1.62.1"
   },
   "devDependencies": {
+    "@types/material-colors": "^1.2.0",
     "@types/node": "^20.2.5",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",

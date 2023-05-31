@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import Text from "@/components/common/Text";
 import AddTodoModal from "./TodoList/AddTodoModal";
 import { useState } from "react";
+import Button from "@/components/common/Button";
 
 type Props = {};
 
@@ -35,10 +36,11 @@ const Home = (props: Props) => {
       {TODO_LIST.map((todo, index) => (
         <TodoListItem key={todo.title + index} {...todo} />
       ))}
-      <AddTodoModal
+      {/* <AddTodoModal
         open={AddTodoModalOpen}
         onClose={() => setAddTodoModalOpen(() => false)}
-      />
+      /> */}
+      <Button size="cta">할일 추가하기</Button>
     </div>
   );
 };
