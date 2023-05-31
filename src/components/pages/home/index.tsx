@@ -36,11 +36,13 @@ const Home = (props: Props) => {
       {TODO_LIST.map((todo, index) => (
         <TodoListItem key={todo.title + index} {...todo} />
       ))}
-      {/* <AddTodoModal
+      <AddTodoModal
         open={AddTodoModalOpen}
         onClose={() => setAddTodoModalOpen(() => false)}
-      /> */}
-      <Button size="cta">할일 추가하기</Button>
+      />
+      <Button size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
+        할일 추가하기
+      </Button>
     </div>
   );
 };

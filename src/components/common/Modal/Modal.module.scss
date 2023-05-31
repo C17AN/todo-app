@@ -1,10 +1,27 @@
+@import "@/styles/colors.scss";
+
 .backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  background-color: $md-dark-text-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal {
+  padding: 24px;
+  background-color: $md-grey-50;
+  border-radius: 12px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+
+  .modal-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    color: $md-dark-text-primary;
+  }
 }

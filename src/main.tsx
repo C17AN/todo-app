@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/home.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "./styles/reset.css";
+import "./styles/global.scss";
 
 const router = createBrowserRouter([
   {

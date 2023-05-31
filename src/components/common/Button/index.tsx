@@ -22,12 +22,18 @@ const variants: Variants = {
   },
 };
 
-const Button = ({ children, type = "primary", size = "medium" }: Props) => {
+const Button = ({
+  children,
+  type = "primary",
+  size = "medium",
+  ...rest
+}: Props) => {
   const buttonSize = `button-${size}`;
   const buttonType = `button-${type}`;
 
   return (
     <motion.button
+      {...rest}
       variants={variants}
       whileHover={"hover"}
       className={cx("button", buttonSize, buttonType)}
