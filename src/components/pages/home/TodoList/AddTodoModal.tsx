@@ -23,16 +23,20 @@ const AddTodoModal = ({ open, onClose }: Props) => {
     >
       <TodoCategoryContainer>
         <TodoCategory variants={variant} whileHover={"hover"}>
+          <img src="/icons/icon_living.png" alt="생활" />
           생활
         </TodoCategory>
         <TodoCategory variants={variant} whileHover={"hover"}>
+          <img src="/icons/icon_knowledge.png" alt="학습" />
           학습
         </TodoCategory>
         <TodoCategory variants={variant} whileHover={"hover"}>
+          <img src="/icons/icon_development.png" alt="개발" />
           개발
         </TodoCategory>
         <TodoCategory variants={variant} whileHover={"hover"}>
-          교양
+          <img src="/icons/icon_hobby.png" alt="취미" />
+          취미
         </TodoCategory>
       </TodoCategoryContainer>
       <div></div>
@@ -48,13 +52,23 @@ const TodoCategoryContainer = styled.ul`
 
 const TodoCategory = styled(motion.li)`
   text-align: center;
-  padding: 1.2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 4rem;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1.125rem;
   cursor: pointer;
   color: ${colors.grey[300]};
+
+  img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 8px;
+  }
 `;
 
 export default AddTodoModal;

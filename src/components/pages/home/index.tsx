@@ -25,14 +25,17 @@ const TODO_LIST: Todo[] = [
 
 const Home = (props: Props) => {
   const [AddTodoModalOpen, setAddTodoModalOpen] = useState(true);
+
   return (
-    <div>
-      <Text typography="h2">
+    <Container>
+      <Title typography="h2">
         안녕하세요 OO님,
         <br />
         오늘의 하루는 어떠셨나요?
+      </Title>
+      <Text typography="h3" as="h3">
+        오늘의 할 일
       </Text>
-      <div></div>
       {TODO_LIST.map((todo, index) => (
         <TodoListItem key={todo.title + index} {...todo} />
       ))}
@@ -40,15 +43,25 @@ const Home = (props: Props) => {
         open={AddTodoModalOpen}
         onClose={() => setAddTodoModalOpen(() => false)}
       />
-      <Button size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
+      <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
         할일 추가하기
-      </Button>
-    </div>
+      </CTAButton>
+    </Container>
   );
 };
 
-const Title = styled.h2`
-  font-size: 22px;
+const Container = styled.div`
+  padding: 2.4rem 1.6rem;
+`;
+
+const Title = styled(Text)`
+  margin-bottom: 20px;
+`;
+
+const CTAButton = styled(Button)`
+  margin-top: auto;
+  position: sticky;
+  bottom: 0;
 `;
 
 export default Home;
