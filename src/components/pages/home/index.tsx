@@ -1,7 +1,9 @@
 import { Todo } from "src/models/Todo";
-import TodoListItem from "./TodoList/todo-list-item";
+import TodoListItem from "./TodoList/TodoListItem";
 import styled from "@emotion/styled";
 import Text from "@/components/common/Text";
+import AddTodoModal from "./TodoList/AddTodoModal";
+import { useState } from "react";
 
 type Props = {};
 
@@ -21,6 +23,7 @@ const TODO_LIST: Todo[] = [
 ];
 
 const Home = (props: Props) => {
+  const [AddTodoModalOpen, setAddTodoModalOpen] = useState(true);
   return (
     <div>
       <Text typography="h2">
@@ -32,6 +35,10 @@ const Home = (props: Props) => {
       {TODO_LIST.map((todo, index) => (
         <TodoListItem key={todo.title + index} {...todo} />
       ))}
+      <AddTodoModal
+        open={AddTodoModalOpen}
+        onClose={() => setAddTodoModalOpen(() => false)}
+      />
     </div>
   );
 };
