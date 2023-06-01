@@ -1,10 +1,10 @@
-import React from "react";
+import { HTMLAttributes } from "react";
 import style from "./Input.module.scss";
 
-type Props = {};
+interface Props extends HTMLAttributes<HTMLInputElement> {}
 
-const Input = (props: Props) => {
-  return <div>Input</div>;
+const Input = ({ ...rest }: Props) => {
+  return <input {...rest} />;
 };
 
 export default Input;
