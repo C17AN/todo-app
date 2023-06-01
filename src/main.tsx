@@ -1,14 +1,28 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/home.tsx";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Layout from "./components/layout/index.tsx";
+import BookmarkPage from "./pages/bookmark.tsx";
 import "./styles/reset.css";
 import "./styles/global.scss";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <Layout>
+        <HomePage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/bookmark",
+    element: (
+      <Layout>
+        <BookmarkPage />
+      </Layout>
+    ),
   },
 ]);
 

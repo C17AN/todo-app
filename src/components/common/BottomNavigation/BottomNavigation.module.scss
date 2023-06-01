@@ -1,0 +1,21 @@
+@import "@/styles/variables.scss";
+@import "@/styles/colors.scss";
+
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  height: $bottom-navigation-height;
+  width: 100%;
+  background-color: $md-white;
+  display: flex;
+  box-shadow: 0px 0px 4px 2px $md-grey-100;
+
+  .bottom-navigation-menu {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: $md-grey-700;
+    justify-content: center;
+  }
+}
