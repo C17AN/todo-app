@@ -3,29 +3,27 @@ import TodoListItem from "./TodoList/TodoListItem";
 import styled from "@emotion/styled";
 import Text from "@/components/common/Text";
 import AddTodoModal from "./TodoList/AddTodoModal";
-import { useState } from "react";
 import Button from "@/components/common/Button";
 import ProgressBar from "./ProgressBar";
 import colors from "material-colors";
-
-type Props = {};
+import { useState } from "react";
 
 const TODO_LIST: Todo[] = [
-  {
-    title: "태스크 1",
-    description: "태스크 1 내용입니다.",
-    priority: 0,
-  },
-  {
-    title: "태스크 2",
-    description: "태스크 2 내용입니다.",
-    priority: 1,
-  },
-  {
-    title: "태스크 3",
-    description: "태스크 3 내용입니다.",
-    priority: 2,
-  },
+  // {
+  //   title: "태스크 1",
+  //   description: "태스크 1 내용입니다.",
+  //   priority: 0,
+  // },
+  // {
+  //   title: "태스크 2",
+  //   description: "태스크 2 내용입니다.",
+  //   priority: 1,
+  // },
+  // {
+  //   title: "태스크 3",
+  //   description: "태스크 3 내용입니다.",
+  //   priority: 2,
+  // },
 ];
 
 const MISSED_TODO_LIST: Todo[] = [
@@ -48,8 +46,8 @@ const MISSED_TODO_LIST: Todo[] = [
 
 type SortByCondition = "우선순위" | "마감일";
 
-const Home = (props: Props) => {
-  const [AddTodoModalOpen, setAddTodoModalOpen] = useState(true);
+const Home = () => {
+  const [AddTodoModalOpen, setAddTodoModalOpen] = useState(false);
   const [sortByCondition, setSortByCondition] =
     useState<SortByCondition>("우선순위");
 
@@ -65,51 +63,71 @@ const Home = (props: Props) => {
         <br />
         오늘의 하루는 어떠셨나요?
       </Title>
-      <TodayTodoFilter>
+      <section className="today-todo-section">
+        <TodayTodoFilter>
+          <Text typography="h3" as="h3" className="section-title">
+            오늘 해야할 일
+          </Text>
+          <button
+            className="sortby-condition-button"
+            onClick={toggleSortByCondition}
+          >
+            {sortByCondition === "우선순위" ? (
+              <div>우선순위</div>
+            ) : (
+              <div>마감일</div>
+            )}
+          </button>
+        </TodayTodoFilter>
+        {TODO_LIST.length > 0 && (
+          <ProgressBar totalTodoCount={10} resolvedTodoCount={7} />
+        )}
+        {TODO_LIST.length > 0 ? (
+          <TodayTodoList>
+            {TODO_LIST.map((todo, index) => (
+              <TodoListItem key={todo.title + index} {...todo} />
+            ))}
+          </TodayTodoList>
+        ) : (
+          <EmptyTodoList>
+            <Text typography="p" as="p" color={colors.grey["500"]}>
+              <span className="empty-text-1">아직 해야할 일이 없어요.</span>
+              <br />
+              해야할 일이 있다면 등록해 보세요.
+            </Text>
+          </EmptyTodoList>
+        )}
+        <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
+          할일 추가하기
+        </CTAButton>
+        <AddTodoModal
+          open={AddTodoModalOpen}
+          onClose={() => setAddTodoModalOpen(() => false)}
+        />
+      </section>
+      <section className="missed-todo-section">
         <Text typography="h3" as="h3" className="section-title">
-          오늘 해야할 일
+          잠깐, 잊지 않으셨겠죠?
         </Text>
-        <button
-          className="sortby-condition-button"
-          onClick={toggleSortByCondition}
-        >
-          {sortByCondition === "우선순위" ? (
-            <div>우선순위</div>
-          ) : (
-            <div>마감일</div>
-          )}
-        </button>
-      </TodayTodoFilter>
-      <ProgressBar totalTodoCount={10} resolvedTodoCount={7} />
-      <TodayTodoList>
-        {TODO_LIST.map((todo, index) => (
-          <TodoListItem key={todo.title + index} {...todo} />
-        ))}
-      </TodayTodoList>
-      <Text typography="h3" as="h3" className="section-title">
-        잠깐, 잊지 않으셨겠죠?
-      </Text>
-      <TodayTodoList>
-        {MISSED_TODO_LIST.map((todo, index) => (
-          <TodoListItem key={todo.title + index} {...todo} />
-        ))}
-      </TodayTodoList>
-      <AddTodoModal
-        open={AddTodoModalOpen}
-        onClose={() => setAddTodoModalOpen(() => false)}
-      />
-      {/* <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
-        할일 추가하기
-      </CTAButton> */}
+        <TodayTodoList>
+          {MISSED_TODO_LIST.map((todo, index) => (
+            <TodoListItem key={todo.title + index} {...todo} />
+          ))}
+        </TodayTodoList>
+      </section>
     </Container>
   );
 };
 
 const Container = styled.div`
-  padding: 2.4rem 1.2rem;
+  padding: 2.4rem 1.2rem 0 1.2rem;
 
   .section-title {
     margin-bottom: 0.875rem;
+  }
+
+  .today-todo-section {
+    margin-bottom: 2rem;
   }
 `;
 
@@ -137,7 +155,23 @@ const TodayTodoFilter = styled.div`
 `;
 
 const TodayTodoList = styled.ul`
-  margin: 1rem 0 2rem 0;
+  margin: 1rem 0 1rem 0;
+`;
+
+const EmptyTodoList = styled.div`
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border: 1px dashed ${colors.grey["300"]};
+  border-radius: 8px;
+
+  .empty-text-1 {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+  }
 `;
 
 const CTAButton = styled(Button)`

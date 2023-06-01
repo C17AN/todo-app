@@ -1,8 +1,7 @@
-import Home from "../components/pages/home";
+import Home from "@/components/pages/home";
 
-type Props = {};
-
-const HomePage = (props: Props) => {
+// auth guard 등 페이지 단위로 적용해야 할 로직이 있을 경우 이곳에 작성한다.
+const HomePage = () => {
   return (
     <>
       <Home />

@@ -47,6 +47,7 @@ const modalVariants: Variants = {
 
 const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
   const handleClose = (e) => {
+    console.log(e);
     onClose();
     e.preventDefault();
     e.stopPropagation();
@@ -73,7 +74,11 @@ const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
             >
               {title && <h4 className={cx("modal-title")}>{title}</h4>}
               {children}
-              {confirmButton ? <ConfirmButton>확인</ConfirmButton> : null}
+              {confirmButton ? (
+                <ConfirmButton size="small" onClick={() => {}}>
+                  확인
+                </ConfirmButton>
+              ) : null}
             </motion.div>
           </motion.div>
         )}
@@ -83,7 +88,9 @@ const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
 };
 
 const ConfirmButton = styled(Button)`
+  display: block;
   margin-top: 12px;
+  margin-left: auto;
 `;
 
 export default Modal;

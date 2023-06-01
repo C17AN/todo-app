@@ -1,14 +1,13 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import style from "./Button.module.scss";
-import classNames from "classnames/bind";
+import cx from "classnames";
 import { Variants, motion } from "framer-motion";
 import colors from "material-colors";
-
-const cx = classNames.bind(style);
 
 interface Props {
   size?: "tiny" | "small" | "medium" | "large" | "cta";
   type?: "primary" | "disabled";
+  className?: string;
   onClick: () => void;
 }
 
@@ -19,12 +18,13 @@ const variants: Variants = {
       ease: "easeInOut",
     },
     scale: 0.992,
-    backgroundColor: colors.teal["400"],
+    backgroundColor: colors.indigo["400"],
   },
 };
 
 const Button = ({
   children,
+  className,
   type = "primary",
   size = "medium",
   onClick,
@@ -36,7 +36,12 @@ const Button = ({
     <motion.button
       variants={variants}
       whileHover={"hover"}
-      className={cx("button", buttonSize, buttonType)}
+      className={cx(
+        style.button,
+        style[buttonSize],
+        style[buttonType],
+        className
+      )}
       onClick={onClick}
     >
       {children}

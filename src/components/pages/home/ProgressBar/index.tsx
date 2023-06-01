@@ -49,7 +49,7 @@ const Progress = styled.div<{
   width: ${({ resolvedTodoCount, totalTodoCount }) =>
     (resolvedTodoCount / totalTodoCount) * 100}%;
   border-radius: 18px;
-  background-color: ${colors.blue["300"]};
+  background-color: ${colors.indigo["300"]};
 `;
 
 export default ProgressBar;
