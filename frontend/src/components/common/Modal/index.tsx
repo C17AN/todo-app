@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import Button from "../Button";
 import styled from "@emotion/styled";
 import { AnimatePresence, Variants, motion } from "framer-motion";
+import { useDisableScrollOnModalOpen } from "@/components/hooks/useDisableScrollOnModalOpen";
 
 const cx = classNames.bind(style);
 
@@ -46,41 +47,39 @@ const modalVariants: Variants = {
 };
 
 const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
-  const handleClose = (e) => {
-    console.log(e);
-    onClose();
-    e.preventDefault();
-    e.stopPropagation();
-  };
+  useDisableScrollOnModalOpen(open);
 
   return (
     <>
       <AnimatePresence>
         {open && (
-          <motion.div
-            variants={backdropVariants}
-            initial="initial"
-            animate="open"
-            exit="close"
-            className={cx("backdrop")}
-            onClick={handleClose}
-          >
+          <>
             <motion.div
-              variants={modalVariants}
+              variants={backdropVariants}
               initial="initial"
               animate="open"
               exit="close"
-              className={cx("modal")}
-            >
-              {title && <h4 className={cx("modal-title")}>{title}</h4>}
-              {children}
-              {confirmButton ? (
-                <ConfirmButton size="small" onClick={() => {}}>
-                  확인
-                </ConfirmButton>
-              ) : null}
-            </motion.div>
-          </motion.div>
+              className={cx("backdrop")}
+              onClick={onClose}
+            />
+            <div className={cx("modal-container")}>
+              <motion.div
+                variants={modalVariants}
+                initial="initial"
+                animate="open"
+                exit="close"
+                className={cx("modal")}
+              >
+                {title && <h4 className={cx("modal-title")}>{title}</h4>}
+                {children}
+                {confirmButton ? (
+                  <ConfirmButton size="small" onClick={() => {}}>
+                    확인
+                  </ConfirmButton>
+                ) : null}
+              </motion.div>
+            </div>
+          </>
         )}
       </AnimatePresence>
     </>

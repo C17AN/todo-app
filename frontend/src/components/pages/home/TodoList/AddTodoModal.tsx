@@ -18,19 +18,28 @@ const AddTodoModal = ({ open, onClose }: Props) => {
     <Modal open={open} onClose={onClose} title="새로운 일정을 등록해주세요">
       <TodoCategoryContainer>
         <TodoCategory variants={variant} whileHover={"hover"}>
-          <img src="/icons/icon_living.png" alt="생활" />
+          <img
+            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3E0.svg"
+            alt="생활"
+          />
           생활
         </TodoCategory>
         <TodoCategory variants={variant} whileHover={"hover"}>
-          <img src="/icons/icon_knowledge.png" alt="학습" />
+          <img
+            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F4D6.svg"
+            alt="학습"
+          />
           학습
         </TodoCategory>
-        <TodoCategory variants={variant} whileHover={"hover"}>
+        {/* <TodoCategory variants={variant} whileHover={"hover"}>
           <img src="/icons/icon_development.png" alt="개발" />
           개발
-        </TodoCategory>
+        </TodoCategory> */}
         <TodoCategory variants={variant} whileHover={"hover"}>
-          <img src="/icons/icon_hobby.png" alt="취미" />
+          <img
+            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3AE.svg"
+            alt="취미"
+          />
           취미
         </TodoCategory>
       </TodoCategoryContainer>
