@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const BookmarkPage = (props: Props) => {
+const BookmarkPage = () => {
   return <div>BookmarkPage</div>;
 };
 

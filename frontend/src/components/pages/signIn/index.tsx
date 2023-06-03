@@ -2,9 +2,7 @@ import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import styled from "@emotion/styled";
 
-type Props = {};
-
-const SignIn = (props: Props) => {
+const SignIn = () => {
   return (
     <Container>
       <Title>
@@ -16,7 +14,13 @@ const SignIn = (props: Props) => {
       </Title>
       <Input placeholder="이메일" />
       <Input placeholder="비밀번호" />
-      <LoginButton onClick={() => {}}>이메일로 로그인</LoginButton>
+      <LoginButton
+        onClick={() => {
+          console.log("로그인");
+        }}
+      >
+        이메일로 로그인
+      </LoginButton>
     </Container>
   );
 };

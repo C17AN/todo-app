@@ -1,8 +1,4 @@
-import React from "react";
-
-type Props = {};
-
-const TodoList = (props: Props) => {
+const TodoList = () => {
   return <div>TodoList</div>;
 };
 

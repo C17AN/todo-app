@@ -19,17 +19,13 @@ const variant: Variants = {
     opacity: 0,
   },
   fadeOut: {
-    x: "-100%",
-    transition: {
-      duration: 0.3,
-    },
     opacity: 0,
   },
   fadeIn: {
-    transition: {
-      delay: 0.3,
-    },
     opacity: 1,
+    transition: {
+      delay: 0.2,
+    },
   },
 };
 
@@ -58,8 +54,9 @@ const AddTodoModal = ({ open, onClose }: Props) => {
           {addTodoStep === "카테고리" && (
             <TodoCategoryContainer
               variants={variant}
-              animate="fadeIn"
               exit="fadeOut"
+              initial="invisible"
+              animate="fadeIn"
             >
               <TodoCategory
                 variants={variant}
@@ -102,6 +99,7 @@ const AddTodoModal = ({ open, onClose }: Props) => {
             <TodoInformationInputContainer
               variants={variant}
               initial="invisible"
+              exit="fadeOut"
               animate="fadeIn"
             >
               <InputContainer>
