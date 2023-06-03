@@ -4,16 +4,10 @@ import Text from "@/components/common/Text";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <Container>
-      <Title>
-        <span className="title-text">완전히</span>
-        <br />
-        <span className="title-text">새로운</span>
-        <br />
-        <span className="title-text">일정관리</span>
-      </Title>
+      <Input label="이름" placeholder="이름" />
       <Input placeholder="이메일" />
       <Input placeholder="비밀번호" />
       <LoginButton
@@ -23,8 +17,8 @@ const SignIn = () => {
       >
         이메일로 로그인
       </LoginButton>
-      <Link to="/signUp">
-        <Text typography="sm">아직 회원이 아니시라면</Text>
+      <Link to="signUp">
+        <Text typography="sm">위 정보로 시작하기</Text>
       </Link>
     </Container>
   );
@@ -51,4 +45,4 @@ const LoginButton = styled(Button)`
   margin-top: auto;
 `;
 
-export default SignIn;
+export default SignUp;
