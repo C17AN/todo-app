@@ -10,6 +10,7 @@ interface Props {
   className?: string;
   onClick: () => void;
   disabled?: boolean;
+  loading?: boolean;
 }
 
 const variants: Variants = {
@@ -30,6 +31,7 @@ const Button = ({
   size = "medium",
   onClick,
   disabled,
+  loading,
 }: PropsWithChildren<Props>) => {
   const buttonSize = `button-${size}`;
   const buttonType = `button-${type}`;
@@ -52,7 +54,16 @@ const Button = ({
       disabled={disabled}
       onClick={handleClick}
     >
-      {children}
+      <span className={cx(style["text-wrapper"])}>
+        {loading && (
+          <img
+            src="/icons/loading.svg"
+            alt="불러오는 중"
+            className={cx(style["loading-icon"])}
+          />
+        )}
+        {children}
+      </span>
     </motion.button>
   );
 };

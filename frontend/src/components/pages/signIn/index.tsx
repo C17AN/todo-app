@@ -3,6 +3,7 @@ import Input from "@/components/common/Input";
 import Text from "@/components/common/Text";
 import { SignInParams, signIn, useSignIn } from "@/remotes/signIn";
 import styled from "@emotion/styled";
+import colors from "material-colors";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
@@ -41,13 +42,14 @@ const SignIn = () => {
       />
       <LoginInfoInput
         label="비밀번호"
+        type="password"
         placeholder="비밀번호를 입력해주세요"
         {...register("password")}
       />
-      <LoginButton onClick={handleSignIn}>이메일로 로그인</LoginButton>
       <SignUpLink to="/signUp">
         <Text typography="sm">아직 회원이 아니신가요?</Text>
       </SignUpLink>
+      <LoginButton onClick={handleSignIn}>이메일로 로그인</LoginButton>
       <Toaster />
     </Container>
   );
@@ -81,7 +83,9 @@ const LoginButton = styled(Button)`
 `;
 
 const SignUpLink = styled(Link)`
-  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  color: ${colors.darkText.secondary};
 `;
 
 export default SignIn;
