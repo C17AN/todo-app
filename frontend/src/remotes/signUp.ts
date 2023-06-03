@@ -16,6 +16,6 @@ export const signUp = async ({ email, name, password }: SignUpParams) => {
       },
     },
   });
-  if (error) throw error;
+  if (error) throw { status: error.status, message: error.message };
   return data;
 };

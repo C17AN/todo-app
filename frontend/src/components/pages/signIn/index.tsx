@@ -1,23 +1,29 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Text from "@/components/common/Text";
-import { SignInParams, signIn, useSignIn } from "@/remotes/signIn";
+import { SignInParams, signIn } from "@/remotes/signIn";
 import styled from "@emotion/styled";
+import { AuthError } from "@supabase/supabase-js";
 import colors from "material-colors";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const { register, getValues } = useForm<SignInParams>();
+  const { register, getValues, formState } = useForm<SignInParams>();
+  const navigate = useNavigate();
   const { mutate } = useMutation(signIn, {
     onSuccess() {
       toast.success("로그인에 성공했습니다.");
+      navigate("/");
     },
-    onError(error) {
-      toast.error("로그인에 실패했습니다.");
-      console.error(error);
+    onError(error: AuthError) {
+      if (error.status === 400) {
+        toast.error(
+          "이메일 인증이 완료되지 않았습니다.\n메일함을 확인해 주세요."
+        );
+      }
     },
   });
 
@@ -49,7 +55,9 @@ const SignIn = () => {
       <SignUpLink to="/signUp">
         <Text typography="sm">아직 회원이 아니신가요?</Text>
       </SignUpLink>
-      <LoginButton onClick={handleSignIn}>이메일로 로그인</LoginButton>
+      <LoginButton onClick={handleSignIn} disabled={!formState.isValid}>
+        이메일로 로그인
+      </LoginButton>
       <Toaster />
     </Container>
   );

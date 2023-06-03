@@ -1,37 +1,62 @@
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Layout from "./layout/index.tsx";
 import BookmarkPage from "./pages/bookmark";
 import HomePage from "./pages/home.tsx";
 import SignInPage from "./pages/signIn.tsx";
+import SignUpPage from "./pages/signUp.tsx";
+import LayoutWithBottomNavigation from "./layout/LayoutWithBottomNavigation.tsx";
+import LayoutWithoutBottomNavigation from "./layout/LayoutWithoutBottomNavigation.tsx";
 import "./styles/reset.css";
 import "./styles/global.scss";
-import SignUpPage from "./pages/signUp.tsx";
+import { pageTransitionVariant } from "./animations/pageTransition.ts";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Layout>
+      <LayoutWithBottomNavigation
+        variants={pageTransitionVariant}
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+      >
         <HomePage />
-      </Layout>
+      </LayoutWithBottomNavigation>
     ),
   },
   {
     path: "/signIn",
-    element: <SignInPage />,
+    element: (
+      <LayoutWithoutBottomNavigation
+        variants={pageTransitionVariant}
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+      >
+        <SignInPage />
+      </LayoutWithoutBottomNavigation>
+    ),
   },
   {
     path: "/signUp",
-    element: <SignUpPage />,
+    element: (
+      <LayoutWithoutBottomNavigation
+        variants={pageTransitionVariant}
+        initial="hidden"
+        animate="enter"
+        exit="exit"
+      >
+        <SignUpPage />
+      </LayoutWithoutBottomNavigation>
+    ),
   },
   {
     path: "/bookmark",
     element: (
-      <Layout>
+      <LayoutWithBottomNavigation>
         <BookmarkPage />
-      </Layout>
+      </LayoutWithBottomNavigation>
     ),
   },
 ]);
