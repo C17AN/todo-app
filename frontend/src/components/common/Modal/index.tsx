@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import Button from "../Button";
 import styled from "@emotion/styled";
 import { AnimatePresence, Variants, motion } from "framer-motion";
-import { useDisableScrollOnModalOpen } from "@/components/hooks/useDisableScrollOnModalOpen";
+import { useDisableScrollOnModalOpen } from "@/hooks/useDisableScrollOnModalOpen";
 
 const cx = classNames.bind(style);
 
