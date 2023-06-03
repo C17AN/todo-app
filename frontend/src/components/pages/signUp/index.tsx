@@ -13,8 +13,6 @@ const SignUp = () => {
     mutate({ name, email, password });
   };
 
-  console.log(formState.errors);
-
   return (
     <Container>
       <Input
@@ -37,6 +35,7 @@ const SignUp = () => {
         label="비밀번호"
         className="signup-input"
         placeholder="비밀번호"
+        type="password"
         {...register("password", {
           required: true,
         })}

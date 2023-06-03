@@ -19,6 +19,7 @@ const Input = forwardRef<any, Props>(
           ref={ref}
           className={cx(style.input, error && style["input-error"], className)}
           disabled={disabled}
+          autoComplete="off"
           {...rest}
         />
         {bottomText &&
