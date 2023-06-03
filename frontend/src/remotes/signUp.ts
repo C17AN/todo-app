@@ -1,6 +1,7 @@
 import { useMutation } from "react-query";
 import { supabaseClient } from "@/config/supabaseClient";
 import { AuthResponse } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 
 export type SignUpParams = {
   email: string;
@@ -29,5 +30,10 @@ export const signUp = async ({ email, name, password }: SignUpParams) => {
 };
 
 export const useSignUp = () => {
-  return useMutation("signUp", signUp);
+  const navigate = useNavigate();
+  return useMutation("signUp", signUp, {
+    onSuccess(data, variables, context) {
+      () => navigate("/");
+    },
+  });
 };

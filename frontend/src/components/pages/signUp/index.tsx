@@ -1,7 +1,9 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
+import Text from "@/components/common/Text";
 import { SignUpParams, useSignUp } from "@/remotes/signUp";
 import styled from "@emotion/styled";
+import colors from "material-colors";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
@@ -15,6 +17,14 @@ const SignUp = () => {
 
   return (
     <Container>
+      <Text typography="h2">만나서 반가워요!</Text>
+      <Text
+        typography="sm"
+        color={colors.grey[600]}
+        className="signup-subtitle"
+      >
+        서비스 이용을 위한 최소한의 정보를 입력받고 있어요.
+      </Text>
       <Input
         label="이름"
         placeholder="이름"
@@ -55,6 +65,10 @@ const Container = styled.div`
 
   .signup-input {
     margin-bottom: 12px;
+  }
+
+  .signup-subtitle {
+    margin: 8px 0 20px 0;
   }
 `;
 

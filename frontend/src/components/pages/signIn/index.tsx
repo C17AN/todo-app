@@ -1,10 +1,30 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Text from "@/components/common/Text";
+import { SignInParams, signIn, useSignIn } from "@/remotes/signIn";
 import styled from "@emotion/styled";
+import { useForm } from "react-hook-form";
+import { Toaster, toast } from "react-hot-toast";
+import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
+  const { register, getValues } = useForm<SignInParams>();
+  const { mutate } = useMutation(signIn, {
+    onSuccess() {
+      toast.success("로그인에 성공했습니다.");
+    },
+    onError(error) {
+      toast.error("로그인에 실패했습니다.");
+      console.error(error);
+    },
+  });
+
+  const handleSignIn = () => {
+    const { email, password } = getValues();
+    mutate({ email, password });
+  };
+
   return (
     <Container>
       <Title>
@@ -14,18 +34,21 @@ const SignIn = () => {
         <br />
         <span className="title-text">일정관리</span>
       </Title>
-      <Input placeholder="이메일" />
-      <Input placeholder="비밀번호" />
-      <LoginButton
-        onClick={() => {
-          console.log("로그인");
-        }}
-      >
-        이메일로 로그인
-      </LoginButton>
-      <Link to="/signUp">
-        <Text typography="sm">아직 회원이 아니시라면</Text>
-      </Link>
+      <LoginInfoInput
+        label="이메일"
+        placeholder="이메일을 입력해주세요"
+        {...register("email")}
+      />
+      <LoginInfoInput
+        label="비밀번호"
+        placeholder="비밀번호를 입력해주세요"
+        {...register("password")}
+      />
+      <LoginButton onClick={handleSignIn}>이메일로 로그인</LoginButton>
+      <SignUpLink to="/signUp">
+        <Text typography="sm">아직 회원이 아니신가요?</Text>
+      </SignUpLink>
+      <Toaster />
     </Container>
   );
 };
@@ -33,13 +56,14 @@ const SignIn = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 2rem 2rem;
   min-height: 100vh;
 `;
 
 const Title = styled.h1`
   font-size: 3rem;
   font-weight: 800;
+  margin-bottom: 20px;
 
   .title-text {
     display: inline-block;
@@ -47,8 +71,17 @@ const Title = styled.h1`
   }
 `;
 
+const LoginInfoInput = styled(Input)`
+  margin-bottom: 20px;
+`;
+
 const LoginButton = styled(Button)`
   margin-top: auto;
+  margin-bottom: 12px;
+`;
+
+const SignUpLink = styled(Link)`
+  text-align: center;
 `;
 
 export default SignIn;
