@@ -6,6 +6,12 @@
   border: 0;
   cursor: pointer;
   font-weight: 600;
+
+  &:disabled {
+    background-color: $md-grey-300 !important;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: not-allowed;
+  }
 }
 
 .button-primary {

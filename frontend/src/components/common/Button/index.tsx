@@ -9,6 +9,7 @@ interface Props {
   type?: "primary" | "disabled";
   className?: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
 const variants: Variants = {
@@ -28,21 +29,28 @@ const Button = ({
   type = "primary",
   size = "medium",
   onClick,
+  disabled,
 }: PropsWithChildren<Props>) => {
   const buttonSize = `button-${size}`;
   const buttonType = `button-${type}`;
 
+  const handleClick = () => {
+    if (disabled) return;
+    onClick();
+  };
+
   return (
     <motion.button
       variants={variants}
-      whileHover={"hover"}
+      whileHover={!disabled ? "hover" : undefined}
       className={cx(
         style.button,
         style[buttonSize],
         style[buttonType],
         className
       )}
-      onClick={onClick}
+      disabled={disabled}
+      onClick={handleClick}
     >
       {children}
     </motion.button>
