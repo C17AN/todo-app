@@ -24,7 +24,8 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.11.2",
     "sass": "^1.62.1",
-    "swiper": "^9.3.2"
+    "swiper": "^9.3.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.18",

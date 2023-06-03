@@ -1,16 +1,36 @@
+@import "@/styles/colors.scss";
+
 .input {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  font-size: 16px;
+  font-size: 14px;
+  display: block;
+  transition: 0.2s ease-in-out color, 0.2s ease-in-out border-color;
+  outline: 0;
+
+  &::placeholder {
+    font-size: 12px;
+  }
+
+  &:focus {
+    border-color: red;
+  }
+
+  &:disabled {
+    background-color: $md-grey-300;
+    color: #aaa;
+    cursor: not-allowed;
+  }
 }
 
 .input-label {
   display: block;
-  margin-bottom: 12px;
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+  color: $md-grey-700;
 }
 
 .input-error {

@@ -60,7 +60,7 @@ const Text = memo(
           <h2
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </h2>
@@ -70,7 +70,7 @@ const Text = memo(
           <h3
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </h3>
@@ -80,7 +80,7 @@ const Text = memo(
           <h4
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </h4>
@@ -90,7 +90,7 @@ const Text = memo(
           <h5
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </h5>
@@ -100,7 +100,7 @@ const Text = memo(
           <h6
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </h6>
@@ -110,7 +110,7 @@ const Text = memo(
           <p
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </p>
@@ -120,7 +120,7 @@ const Text = memo(
           <span
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </span>
@@ -130,7 +130,7 @@ const Text = memo(
           <li
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </li>
@@ -140,7 +140,7 @@ const Text = memo(
           <div
             className={`${style[`text-${typography}`]} ${className}`}
             id={id}
-            style={{ color, fontWeight: fontWeightValue() }}
+            style={{ color }}
           >
             {children}
           </div>

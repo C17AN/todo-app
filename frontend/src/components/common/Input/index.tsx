@@ -1,34 +1,31 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, ReactNode, forwardRef } from "react";
+import cx from "classnames";
 import style from "./Input.module.scss";
-import classNames from "classnames";
-import Text from "../Text";
-import colors from "material-colors";
-
-const cx = classNames.bind(style);
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: boolean;
+  disabled?: boolean;
+  className?: string;
+  bottomText?: string | ReactNode;
 }
 
-const Input = ({ label, error, ...rest }: Props) => {
-  const errorClassName = error && "input-error";
-  return (
-    <>
-      {label && (
-        <Text
-          typography="sm"
-          as="p"
-          fontWeight="bold"
-          color={colors.grey[700]}
-          className={cx("input-label")}
-        >
-          {label}
-        </Text>
-      )}
-      <input className={cx("input", errorClassName)} {...rest} />
-    </>
-  );
-};
+const Input = forwardRef<any, Props>(
+  ({ label, error, disabled, className, bottomText, ...rest }, ref) => {
+    return (
+      <>
+        {label && <p className={style["input-label"]}>{label}</p>}
+        <input
+          ref={ref}
+          className={cx(style.input, error && style["input-error"], className)}
+          disabled={disabled}
+          {...rest}
+        />
+        {bottomText &&
+          (typeof bottomText === "string" ? <p>{bottomText}</p> : bottomText)}
+      </>
+    );
+  }
+);
 
 export default Input;
