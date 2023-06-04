@@ -8,6 +8,7 @@ import ProgressBar from "./ProgressBar";
 import colors from "material-colors";
 import { useState } from "react";
 import { useSession } from "@/hooks/useSession";
+import { useListTodo } from "@/remotes/todo";
 
 const TODO_LIST: Todo[] = [
   // {
@@ -52,6 +53,9 @@ const Home = () => {
   const [AddTodoModalOpen, setAddTodoModalOpen] = useState(false);
   const [sortByCondition, setSortByCondition] =
     useState<SortByCondition>("우선순위");
+
+  const { data } = useListTodo();
+  console.log(data);
 
   const toggleSortByCondition = () => {
     if (sortByCondition === "마감일") setSortByCondition(() => "우선순위");
