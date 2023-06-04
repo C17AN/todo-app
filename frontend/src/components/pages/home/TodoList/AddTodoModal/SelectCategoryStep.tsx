@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import colors from "material-colors";
-import React from "react";
 import { useFormContext } from "react-hook-form";
 
 type Props = {};
@@ -39,7 +38,7 @@ const SelectCategoryStep = (props: Props) => {
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => selectCategory("생활")}
+          onClick={() => setValue("category", "생활")}
         >
           <img
             src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3E0.svg"
@@ -50,7 +49,7 @@ const SelectCategoryStep = (props: Props) => {
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => selectCategory("학습")}
+          onClick={() => setValue("category", "학습")}
         >
           <img
             src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F4D6.svg"
@@ -61,7 +60,7 @@ const SelectCategoryStep = (props: Props) => {
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => selectCategory("취미")}
+          onClick={() => setValue("category", "취미")}
         >
           <img
             src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3AE.svg"

@@ -10,42 +10,6 @@ import { useState } from "react";
 import { useSession } from "@/hooks/useSession";
 import { useListTodo } from "@/remotes/todo";
 
-const TODO_LIST: Todo[] = [
-  // {
-  //   title: "태스크 1",
-  //   description: "태스크 1 내용입니다.",
-  //   priority: 0,
-  // },
-  // {
-  //   title: "태스크 2",
-  //   description: "태스크 2 내용입니다.",
-  //   priority: 1,
-  // },
-  // {
-  //   title: "태스크 3",
-  //   description: "태스크 3 내용입니다.",
-  //   priority: 2,
-  // },
-];
-
-const MISSED_TODO_LIST: Todo[] = [
-  {
-    title: "태스크 1",
-    description: "태스크 1 내용입니다.",
-    priority: 0,
-  },
-  {
-    title: "태스크 2",
-    description: "태스크 2 내용입니다.",
-    priority: 1,
-  },
-  {
-    title: "태스크 3",
-    description: "태스크 3 내용입니다.",
-    priority: 2,
-  },
-];
-
 type SortByCondition = "우선순위" | "마감일";
 
 const Home = () => {
@@ -54,9 +18,7 @@ const Home = () => {
   const [sortByCondition, setSortByCondition] =
     useState<SortByCondition>("우선순위");
 
-  const { data } = useListTodo();
-  console.log("투두 목록: ", data);
-  console.log("세션 : ", session);
+  const { data: todoList = [] } = useListTodo();
 
   const toggleSortByCondition = () => {
     if (sortByCondition === "마감일") setSortByCondition(() => "우선순위");
@@ -86,12 +48,15 @@ const Home = () => {
             )}
           </button>
         </TodayTodoFilter>
-        {TODO_LIST.length > 0 && (
-          <ProgressBar totalTodoCount={10} resolvedTodoCount={7} />
+        {todoList.length > 0 && (
+          <ProgressBar
+            totalTodoCount={todoList.length}
+            resolvedTodoCount={todoList.length}
+          />
         )}
-        {TODO_LIST.length > 0 ? (
+        {todoList.length > 0 ? (
           <TodayTodoList>
-            {TODO_LIST.map((todo, index) => (
+            {todoList.map((todo, index) => (
               <TodoListItem key={todo.title + index} {...todo} />
             ))}
           </TodayTodoList>
@@ -117,7 +82,7 @@ const Home = () => {
           잠깐, 잊지 않으셨겠죠?
         </Text>
         <TodayTodoList>
-          {MISSED_TODO_LIST.map((todo, index) => (
+          {todoList.map((todo, index) => (
             <TodoListItem key={todo.title + index} {...todo} />
           ))}
         </TodayTodoList>
