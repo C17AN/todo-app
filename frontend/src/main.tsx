@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import BookmarkPage from "./pages/bookmark";
 import HomePage from "./pages/home.tsx";
@@ -12,62 +12,64 @@ import "./styles/global.scss";
 import { pageTransitionVariant } from "./animations/pageTransition.ts";
 import { SessionProvider } from "./hooks/useSession.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <LayoutWithBottomNavigation
-        variants={pageTransitionVariant}
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-      >
-        <HomePage />
-      </LayoutWithBottomNavigation>
-    ),
-  },
-  {
-    path: "/signIn",
-    element: (
-      <LayoutWithoutBottomNavigation
-        variants={pageTransitionVariant}
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-      >
-        <SignInPage />
-      </LayoutWithoutBottomNavigation>
-    ),
-  },
-  {
-    path: "/signUp",
-    element: (
-      <LayoutWithoutBottomNavigation
-        variants={pageTransitionVariant}
-        initial="hidden"
-        animate="enter"
-        exit="exit"
-      >
-        <SignUpPage />
-      </LayoutWithoutBottomNavigation>
-    ),
-  },
-  {
-    path: "/bookmark",
-    element: (
-      <LayoutWithBottomNavigation>
-        <BookmarkPage />
-      </LayoutWithBottomNavigation>
-    ),
-  },
-]);
-
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
-    <SessionProvider>
-      <RouterProvider router={router} />
-    </SessionProvider>
+    <BrowserRouter>
+      <SessionProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LayoutWithBottomNavigation
+                variants={pageTransitionVariant}
+                initial="hidden"
+                animate="enter"
+                exit="exit"
+              >
+                <HomePage />
+              </LayoutWithBottomNavigation>
+            }
+          />
+          <Route
+            path="/signIn"
+            element={
+              <LayoutWithoutBottomNavigation
+                variants={pageTransitionVariant}
+                initial="hidden"
+                animate="enter"
+                exit="exit"
+              >
+                <SignInPage />
+              </LayoutWithoutBottomNavigation>
+            }
+          />
+          <Route
+            path="/signUp"
+            element={
+              <LayoutWithoutBottomNavigation
+                variants={pageTransitionVariant}
+                initial="hidden"
+                animate="enter"
+                exit="exit"
+              >
+                <SignUpPage />
+              </LayoutWithoutBottomNavigation>
+            }
+          />
+          <Route
+            path="/bookmark"
+            element={
+              <LayoutWithBottomNavigation>
+                <BookmarkPage />
+              </LayoutWithBottomNavigation>
+            }
+          />
+        </Routes>
+      </SessionProvider>
+
+      {/* <RouterProvider router={router} /> */}
+    </BrowserRouter>
   </QueryClientProvider>
 );

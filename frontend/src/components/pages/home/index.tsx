@@ -55,7 +55,8 @@ const Home = () => {
     useState<SortByCondition>("우선순위");
 
   const { data } = useListTodo();
-  console.log(data);
+  console.log("투두 목록: ", data);
+  console.log("세션 : ", session);
 
   const toggleSortByCondition = () => {
     if (sortByCondition === "마감일") setSortByCondition(() => "우선순위");

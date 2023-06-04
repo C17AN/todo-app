@@ -7,6 +7,7 @@ import {
   ReactNode,
   useContext,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CustomUser extends User {
   user_metadata: {
@@ -34,13 +35,19 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
 
 export const useSession = () => {
   const { session: currentSession } = useContext(SessionContext);
+  const navigate = useNavigate();
   const [session, setSession] = useState<CustomSession | null>(null);
 
   const checkSession = async () => {
     const { data, error } = await supabaseClient.auth.getSession();
     if (error) throw error;
     else {
-      setSession(() => data?.session);
+      if (!data.session) {
+        navigate("/signIn");
+        return;
+      } else {
+        setSession(() => data?.session as CustomSession);
+      }
     }
   };
 
