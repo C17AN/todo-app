@@ -10,6 +10,7 @@ import LayoutWithoutBottomNavigation from "./layout/LayoutWithoutBottomNavigatio
 import "./styles/reset.css";
 import "./styles/global.scss";
 import { pageTransitionVariant } from "./animations/pageTransition.ts";
+import { SessionProvider } from "./hooks/useSession.tsx";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,8 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+    <SessionProvider>
+      <RouterProvider router={router} />
+    </SessionProvider>
   </QueryClientProvider>
 );

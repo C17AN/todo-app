@@ -7,6 +7,7 @@ import Button from "@/components/common/Button";
 import ProgressBar from "./ProgressBar";
 import colors from "material-colors";
 import { useState } from "react";
+import { useSession } from "@/hooks/useSession";
 
 const TODO_LIST: Todo[] = [
   // {
@@ -47,6 +48,7 @@ const MISSED_TODO_LIST: Todo[] = [
 type SortByCondition = "우선순위" | "마감일";
 
 const Home = () => {
+  const session = useSession();
   const [AddTodoModalOpen, setAddTodoModalOpen] = useState(false);
   const [sortByCondition, setSortByCondition] =
     useState<SortByCondition>("우선순위");
@@ -59,7 +61,7 @@ const Home = () => {
   return (
     <Container>
       <Title typography="h2">
-        안녕하세요 OO님,
+        안녕하세요 {session?.user.user_metadata.name}님,
         <br />
         오늘의 하루는 어떠셨나요?
       </Title>

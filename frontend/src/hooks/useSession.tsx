@@ -1,31 +1,53 @@
 import { supabaseClient } from "@/config/supabaseClient";
-import { Session } from "@supabase/supabase-js";
-import { useEffect, createContext, useState } from "react";
+import { Session, User } from "@supabase/supabase-js";
+import {
+  useEffect,
+  createContext,
+  useState,
+  ReactNode,
+  useContext,
+} from "react";
 
-export const SessionContext = createContext<Session | null>(null);
+interface CustomUser extends User {
+  user_metadata: {
+    name: string;
+  };
+}
 
-export const SessionProvider = ({ children }) => {
+interface CustomSession extends Session {
+  user: CustomUser;
+}
+
+export const SessionContext = createContext<{ session: CustomSession | null }>({
+  session: null,
+});
+
+export const SessionProvider = ({ children }: { children: ReactNode }) => {
+  const session = useSession();
+
   return (
-    <SessionContext.Provider value={supabaseClient.auth.session()}>
+    <SessionContext.Provider value={{ session }}>
       {children}
     </SessionContext.Provider>
   );
 };
 
 export const useSession = () => {
-  const [session, setSession] = useState<Session>();
+  const { session: currentSession } = useContext(SessionContext);
+  const [session, setSession] = useState<CustomSession | null>(null);
 
   const checkSession = async () => {
     const { data, error } = await supabaseClient.auth.getSession();
     if (error) throw error;
     else {
-      setSession(() => data.session);
+      setSession(() => data?.session);
     }
   };
 
   useEffect(() => {
+    if (currentSession) return;
     checkSession();
   }, []);
 
-  return session;
+  return currentSession ?? session;
 };
