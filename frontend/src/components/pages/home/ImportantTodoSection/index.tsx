@@ -31,9 +31,9 @@ const ImportantTodoSection = ({ todoList }: Props) => {
           as="h4"
           color={colors.darkText.primary}
         >
-          진행중인 일정
+          중요한 일정
         </Text>
-        <button
+        {/* <button
           className="sortby-condition-button"
           onClick={toggleSortByCondition}
         >
@@ -42,7 +42,7 @@ const ImportantTodoSection = ({ todoList }: Props) => {
           ) : (
             <div>마감일</div>
           )}
-        </button>
+        </button> */}
       </TodayTodoFilter>
 
       {todoList.length > 0 ? (
@@ -64,18 +64,12 @@ const ImportantTodoSection = ({ todoList }: Props) => {
 };
 
 const Container = styled.section`
-  background: ${colors.grey[50]};
+  background: #daeaf6;
+  display: flex;
+  flex-direction: column;
   padding: 14px 18px;
   border-radius: 12px;
   flex: 5;
-`;
-
-const Content = styled.div`
-  background: ${colors.grey[50]};
-  padding: 12px;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
 `;
 
 const TodayTodoFilter = styled.div`
@@ -115,11 +109,13 @@ const EmptyTodoList = styled.div`
 
 const TodayTodoList = styled.ul`
   width: 100%;
+  height: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   border-radius: 12px;
+  overflow: hidden;
 `;
 
 export default ImportantTodoSection;

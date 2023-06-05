@@ -12,6 +12,7 @@ import { SessionProvider } from "./hooks/useSession.tsx";
 import CalendarPage from "./pages/calendar.tsx";
 import "./styles/reset.css";
 import "./styles/global.scss";
+import ProfilePage from "./pages/profile.tsx";
 
 const queryClient = new QueryClient();
 
@@ -74,10 +75,17 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
                 <CalendarPage />
               </LayoutWithBottomNavigation>
             }
-          ></Route>
+          />
+          <Route
+            path="/profile"
+            element={
+              <LayoutWithBottomNavigation>
+                <ProfilePage />
+              </LayoutWithBottomNavigation>
+            }
+          />
         </Routes>
       </SessionProvider>
-
       {/* <RouterProvider router={router} /> */}
     </BrowserRouter>
   </QueryClientProvider>

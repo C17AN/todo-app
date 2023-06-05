@@ -2,7 +2,17 @@ import { ReactNode, memo } from "react";
 import style from "./Text.module.scss";
 
 type Props = {
-  typography: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "sm";
+  typography:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "p"
+    | "sm"
+    | "section-title"
+    | "grey-description";
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "li" | "p" | "span" | "div";
   fontWeight?:
     | "extrabold"

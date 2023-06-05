@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./BottomNavigation.module.scss";
 import className from "classnames/bind";
 import { Link } from "react-router-dom";
@@ -18,6 +17,9 @@ const BottomNavigation = (props: Props) => {
       </Link>
       <Link to="/bookmark" className={cx("bottom-navigation-menu")}>
         <div>북마크</div>
+      </Link>
+      <Link to="/profile" className={cx("bottom-navigation-menu")}>
+        <div>프로필</div>
       </Link>
     </div>
   );

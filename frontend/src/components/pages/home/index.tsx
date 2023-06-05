@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useSession } from "@/hooks/useSession";
 import { useListTodo } from "@/remotes/todo";
 import ImportantTodoSection from "./ImportantTodoSection";
+import MonthlyProgressSection from "./MonthlyProgressSection";
 
 const Home = () => {
   const session = useSession();
@@ -27,6 +28,7 @@ const Home = () => {
         <br />
         오늘의 하루는 어떠셨나요?
       </Title>
+      <MonthlyProgressSection />
       <section className="main-top-section">
         <section className="main-left-section">
           <ImportantTodoSection todoList={todoList} />
