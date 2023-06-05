@@ -17,12 +17,20 @@ const TodoListItem = ({
   complete,
   toggleComplete,
 }: Props) => {
+  const triggerVibrate = () => {
+    navigator.vibrate(1000);
+  };
+
   return (
-    <TodoListItemContainer>
-      <Checkbox onChange={toggleComplete} />
-      <h3 className="todo-item-title">{title}</h3>
-      <p className="todo-item-summary">{description}</p>
-      <Chip>진행중</Chip>
+    <TodoListItemContainer onClick={triggerVibrate}>
+      <div className="todo-item-container">
+        <Checkbox onChange={toggleComplete} />
+        <div className="todo-item-inner-container">
+          <Chip>진행중</Chip>
+          <h3 className="todo-item-title">{title}</h3>
+          <p className="todo-item-summary">{description}</p>
+        </div>
+      </div>
     </TodoListItemContainer>
   );
 };
@@ -35,15 +43,25 @@ const TodoListItemContainer = styled.li`
   margin-bottom: 8px;
   border-radius: 8px;
 
-  .todo-item-title {
-    margin-bottom: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: ${colors.grey[800]};
+  .todo-item-container {
+    display: flex;
+    align-items: center;
   }
 
-  .todo-item-summary {
-    font-size: 0.75rem;
+  .todo-item-inner-container {
+    margin-left: 8px;
+
+    .todo-item-title {
+      margin-top: 8px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: ${colors.grey[800]};
+    }
+
+    .todo-item-summary {
+      font-size: 0.75rem;
+    }
   }
 `;
 

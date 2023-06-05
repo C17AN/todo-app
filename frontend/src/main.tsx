@@ -13,6 +13,7 @@ import CalendarPage from "./pages/calendar.tsx";
 import "./styles/reset.css";
 import "./styles/global.scss";
 import ProfilePage from "./pages/profile.tsx";
+import ProjectPage from "./pages/project.tsx";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             element={
               <LayoutWithBottomNavigation>
                 <CalendarPage />
+              </LayoutWithBottomNavigation>
+            }
+          />
+          <Route
+            path="/project"
+            element={
+              <LayoutWithBottomNavigation>
+                <ProjectPage />
               </LayoutWithBottomNavigation>
             }
           />
