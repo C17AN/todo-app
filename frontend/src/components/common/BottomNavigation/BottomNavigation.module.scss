@@ -13,9 +13,17 @@
   .bottom-navigation-menu {
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     text-decoration: none;
     color: $md-grey-700;
     justify-content: center;
+  }
+
+  .bottom-navigation-menu-text {
+    font-size: 0.625rem;
+    margin-top: 4px;
+    font-weight: 600;
   }
 }
