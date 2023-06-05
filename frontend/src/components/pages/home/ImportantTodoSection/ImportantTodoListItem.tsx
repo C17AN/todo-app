@@ -10,7 +10,7 @@ type Props = {
 } & Todo &
   HTMLAttributes<HTMLLIElement>;
 
-const TodoListItem = ({
+const ImportantTodoListItem = ({
   title,
   description,
   complete,
@@ -18,31 +18,40 @@ const TodoListItem = ({
 }: Props) => {
   return (
     <TodoListItemContainer>
-      <Checkbox />
+      <img
+        src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F6A8.svg"
+        alt="우선순위 높음 아이콘"
+        className="urgent-item-icon"
+        width={14}
+        height={14}
+      />
       <h3 className="todo-item-title">{title}</h3>
-      <p className="todo-item-summary">{description}</p>
     </TodoListItemContainer>
   );
 };
 
 const TodoListItemContainer = styled.li`
-  padding: 8px 0;
+  display: flex;
+  align-items: center;
   list-style: none;
-  background-color: ${colors.grey[50]};
-  padding: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   border-radius: 8px;
 
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .urgent-item-icon {
+    width: 14px;
+    height: 14px;
+  }
+
   .todo-item-title {
-    margin-bottom: 6px;
     font-size: 0.8rem;
+    margin-left: 8px;
     font-weight: 700;
     color: ${colors.grey[800]};
   }
-
-  .todo-item-summary {
-    font-size: 0.75rem;
-  }
 `;
 
-export default TodoListItem;
+export default ImportantTodoListItem;
