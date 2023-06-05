@@ -10,6 +10,7 @@ import { useSession } from "@/hooks/useSession";
 import { useListTodo } from "@/remotes/todo";
 import ImportantTodoSection from "./ImportantTodoSection";
 import MonthlyProgressSection from "./MonthlyProgressSection";
+import ProjectSection from "./ProjectSection";
 
 const Home = () => {
   const session = useSession();
@@ -41,21 +42,7 @@ const Home = () => {
             )}
           </section>
         </section>
-        <section className="main-right-section">
-          <Text
-            typography="sm"
-            fontWeight="bold"
-            as="h3"
-            color={colors.darkText.primary}
-          >
-            프로젝트
-          </Text>
-          <TodayTodoList>
-            {todoList.map((todo, index) => (
-              <TodoListItem key={todo.title + index} {...todo} />
-            ))}
-          </TodayTodoList>
-        </section>
+        <ProjectSection todoList={todoList} />
       </section>
       <section className="main-middle-section">
         <Text
@@ -63,7 +50,7 @@ const Home = () => {
           fontWeight="semibold"
           color={colors.darkText.primary}
         >
-          오늘의 할일
+          다가오는 일정
         </Text>
         <TodayTodoList>
           {todoList.map((todo, index) => (
@@ -89,6 +76,7 @@ const Container = styled.div`
     gap: 10px;
     display: flex;
     margin-bottom: 1.5rem;
+    min-height: 40vh;
   }
 
   .main-left-section {
