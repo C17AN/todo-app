@@ -7,10 +7,11 @@ import SignInPage from "./pages/signIn.tsx";
 import SignUpPage from "./pages/signUp.tsx";
 import LayoutWithBottomNavigation from "./layout/LayoutWithBottomNavigation.tsx";
 import LayoutWithoutBottomNavigation from "./layout/LayoutWithoutBottomNavigation.tsx";
-import "./styles/reset.css";
-import "./styles/global.scss";
 import { pageTransitionVariant } from "./animations/pageTransition.ts";
 import { SessionProvider } from "./hooks/useSession.tsx";
+import CalendarPage from "./pages/calendar.tsx";
+import "./styles/reset.css";
+import "./styles/global.scss";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               </LayoutWithBottomNavigation>
             }
           />
+          <Route
+            path="/calendar"
+            element={
+              <LayoutWithBottomNavigation>
+                <CalendarPage />
+              </LayoutWithBottomNavigation>
+            }
+          ></Route>
         </Routes>
       </SessionProvider>
 

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import colors from "material-colors";
 import { useState } from "react";
 import ImportantTodoListItem from "./ImportantTodoListItem";
+import ImportantTodoSwiper from "./ImportantTodoSwiper";
 
 type Props = {
   todoList: Todo[];
@@ -46,9 +47,7 @@ const ImportantTodoSection = ({ todoList }: Props) => {
 
       {todoList.length > 0 ? (
         <TodayTodoList>
-          {todoList.map((todo, index) => (
-            <ImportantTodoListItem key={todo.title + index} {...todo} />
-          ))}
+          <ImportantTodoSwiper todoList={todoList} />
         </TodayTodoList>
       ) : (
         <EmptyTodoList>
@@ -115,7 +114,7 @@ const EmptyTodoList = styled.div`
 `;
 
 const TodayTodoList = styled.ul`
-  margin: 1rem 0 1rem 0;
+  width: 100%;
   background-color: #fff;
   display: flex;
   flex-direction: column;

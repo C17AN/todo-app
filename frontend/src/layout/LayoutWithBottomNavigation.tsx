@@ -13,14 +13,12 @@ interface Props extends HTMLMotionProps<"div"> {
 
 const LayoutWithBottomNavigation = ({ children, ...rest }: Props) => {
   return (
-    <>
-      <AnimatePresence>
-        <motion.div className={cx("layout")} id={LAYOUT_ID} {...rest}>
-          {children}
-        </motion.div>
-        <BottomNavigation />
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      <motion.div className={cx("layout")} id={LAYOUT_ID} {...rest}>
+        {children}
+      </motion.div>
+      <BottomNavigation />
+    </AnimatePresence>
   );
 };
 

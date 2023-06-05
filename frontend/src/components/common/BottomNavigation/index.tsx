@@ -11,10 +11,13 @@ const BottomNavigation = (props: Props) => {
   return (
     <div className={cx("bottom-navigation")}>
       <Link to="/" className={cx("bottom-navigation-menu")}>
-        <div>1</div>
+        <div>홈</div>
+      </Link>
+      <Link to="/calendar" className={cx("bottom-navigation-menu")}>
+        <div>캘린더</div>
       </Link>
       <Link to="/bookmark" className={cx("bottom-navigation-menu")}>
-        <div>2</div>
+        <div>북마크</div>
       </Link>
     </div>
   );

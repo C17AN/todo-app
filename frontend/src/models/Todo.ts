@@ -5,4 +5,5 @@ export type Todo = {
   description: string;
   category: TodoCategory;
   priority?: number;
+  complete?: boolean;
 };
