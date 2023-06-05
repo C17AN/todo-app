@@ -17,16 +17,20 @@ const TodoListItem = ({ title, description }: Props) => {
 const TodoListItemContainer = styled.li`
   padding: 8px 0;
   list-style: none;
+  background-color: ${colors.grey[50]};
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
 
   .todo-item-title {
     margin-bottom: 6px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: ${colors.grey[800]};
   }
 
   .todo-item-summary {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 `;
 

@@ -1,4 +1,3 @@
-import { Todo } from "src/models/Todo";
 import TodoListItem from "./TodoList/TodoListItem";
 import styled from "@emotion/styled";
 import Text from "@/components/common/Text";
@@ -27,11 +26,11 @@ const Home = () => {
 
   return (
     <Container>
-      <Title typography="h2">
+      {/* <Title typography="h2">
         안녕하세요 {session?.user.user_metadata.name}님,
         <br />
         오늘의 하루는 어떠셨나요?
-      </Title>
+      </Title> */}
       <section className="today-todo-section">
         <TodayTodoFilter>
           <Text typography="h3" as="h3" className="section-title">
@@ -48,12 +47,7 @@ const Home = () => {
             )}
           </button>
         </TodayTodoFilter>
-        {todoList.length > 0 && (
-          <ProgressBar
-            totalTodoCount={todoList.length}
-            resolvedTodoCount={todoList.length}
-          />
-        )}
+
         {todoList.length > 0 ? (
           <TodayTodoList>
             {todoList.map((todo, index) => (
@@ -70,22 +64,35 @@ const Home = () => {
           </EmptyTodoList>
         )}
         <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
-          할일 추가하기
+          {/* 할일 추가하기 */}
         </CTAButton>
         <AddTodoModal
           open={AddTodoModalOpen}
           onClose={() => setAddTodoModalOpen(() => false)}
         />
       </section>
+      {todoList.length > 0 && (
+        <ProgressBar
+          totalTodoCount={todoList.length}
+          resolvedTodoCount={todoList.length}
+        />
+      )}
       <section className="missed-todo-section">
-        <Text typography="h3" as="h3" className="section-title">
-          잠깐, 잊지 않으셨겠죠?
-        </Text>
-        <TodayTodoList>
-          {todoList.map((todo, index) => (
-            <TodoListItem key={todo.title + index} {...todo} />
-          ))}
-        </TodayTodoList>
+        <MissedTodoCard>
+          <Text
+            typography="sm"
+            fontWeight="bold"
+            as="h3"
+            className="section-title"
+          >
+            잠깐, 잊지 않으셨겠죠?
+          </Text>
+          <TodayTodoList>
+            {todoList.map((todo, index) => (
+              <TodoListItem key={todo.title + index} {...todo} />
+            ))}
+          </TodayTodoList>
+        </MissedTodoCard>
       </section>
     </Container>
   );
@@ -99,7 +106,10 @@ const Container = styled.div`
   }
 
   .today-todo-section {
-    margin-bottom: 2rem;
+    background: linear-gradient(64deg, #ffafcc 60%, #ffafcc98 100%);
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -144,6 +154,13 @@ const EmptyTodoList = styled.div`
     display: inline-block;
     margin-bottom: 0.25rem;
   }
+`;
+
+const MissedTodoCard = styled.div`
+  padding: 16px;
+  background: linear-gradient(42deg, #bde0fe 70%, #bde0fe95 100%);
+  border-radius: 12px;
+  box-shadow: 1px 1px 4px 0px ${colors.grey[200]};
 `;
 
 const CTAButton = styled(Button)`
