@@ -11,7 +11,7 @@ type Props = {
 
 const ImportantTodoSwiper = ({ todoList }: Props) => {
   return (
-    <StyledSwiper slidesPerView={"auto"}>
+    <StyledSwiper spaceBetween={10} slidesPerView={"auto"}>
       {todoList.map((todo) => (
         <SwiperSlide key={todo.title}>
           <ImportantTodoListItem {...todo} />

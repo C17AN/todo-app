@@ -46,7 +46,7 @@ const Home = () => {
             as="h3"
             color={colors.darkText.primary}
           >
-            진행중인 프로젝트
+            프로젝트
           </Text>
           <TodayTodoList>
             {todoList.map((todo, index) => (

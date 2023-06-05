@@ -31,7 +31,7 @@ const ImportantTodoSection = ({ todoList }: Props) => {
           as="h4"
           color={colors.darkText.primary}
         >
-          중요한 일정
+          진행중인 일정
         </Text>
         <button
           className="sortby-condition-button"
@@ -64,7 +64,7 @@ const ImportantTodoSection = ({ todoList }: Props) => {
 };
 
 const Container = styled.section`
-  background: #daeaf6;
+  background: ${colors.grey[50]};
   padding: 14px 18px;
   border-radius: 12px;
   flex: 5;
@@ -119,7 +119,6 @@ const TodayTodoList = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 12px;
   border-radius: 12px;
 `;
 

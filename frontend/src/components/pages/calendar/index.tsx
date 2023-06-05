@@ -3,7 +3,7 @@ import React from "react";
 type Props = {};
 
 const Calendar = (props: Props) => {
-  return <div>Calendar</div>;
+  return <div></div>;
 };
 
 export default Calendar;

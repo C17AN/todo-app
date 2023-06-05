@@ -39,7 +39,8 @@ const TodoListItemContainer = styled.li`
   margin-bottom: 12px;
   border-radius: 8px;
   height: 100%;
-  background-color: #fff;
+  padding: 12px;
+  background-color: #daeaf6;
 
   &:last-of-type {
     margin-bottom: 0;

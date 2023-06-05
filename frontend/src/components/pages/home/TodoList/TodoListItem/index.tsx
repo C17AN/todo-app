@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Todo } from "src/models/Todo";
 import colors from "material-colors";
 import Checkbox from "@/components/common/CheckBox";
+import Chip from "@/components/common/Chip";
 
 type Props = {
   complete: boolean;
@@ -18,9 +19,10 @@ const TodoListItem = ({
 }: Props) => {
   return (
     <TodoListItemContainer>
-      <Checkbox />
+      <Checkbox onChange={toggleComplete} />
       <h3 className="todo-item-title">{title}</h3>
       <p className="todo-item-summary">{description}</p>
+      <Chip>진행중</Chip>
     </TodoListItemContainer>
   );
 };
