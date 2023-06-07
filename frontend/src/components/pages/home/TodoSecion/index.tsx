@@ -5,6 +5,7 @@ import TodoListItem from "../TodoList/TodoListItem";
 import { Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
 import ToggleButton from "@/components/common/SortByButton";
+import CompletedTodoListItem from "../TodoList/CompletedTodoListItem";
 
 type Props = {
   todoList: Todo[];
@@ -31,26 +32,17 @@ const TodoSection = ({ todoList }: Props) => {
         >
           다가오는 일정
         </Text>
-        {/* <button
-          className="sortby-condition-button"
-          onClick={toggleSortByCondition}
-        >
-          <HiSortDescending />
-          {sortByCondition === "우선순위" ? (
-            <div>우선순위</div>
-          ) : (
-            <div>마감일</div>
-          )}
-        </button> */}
         <ToggleButton
-          onClick={() => {}}
+          onClick={toggleSortByCondition}
           toggleOptions={["우선순위", "마감일"]}
         />
       </div>
       <ul>
-        {todoList.map((todo, index) => (
-          <TodoListItem key={todo.title + index} {...todo} />
-        ))}
+        {todoList.map((todo, index) => {
+          if (index === 0) {
+            return <CompletedTodoListItem key={todo.title + index} {...todo} />;
+          } else return <TodoListItem key={todo.title + index} {...todo} />;
+        })}
       </ul>
     </Container>
   );

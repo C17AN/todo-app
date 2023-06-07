@@ -1,10 +1,9 @@
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes } from "react";
 import styled from "@emotion/styled";
 import { Todo } from "src/models/Todo";
 import colors from "material-colors";
 import Checkbox from "@/components/common/CheckBox";
 import Chip from "@/components/common/Chip";
-import { useSwipeable } from "react-swipeable";
 
 type Props = {
   complete: boolean;
@@ -12,36 +11,23 @@ type Props = {
 } & Todo &
   HTMLAttributes<HTMLLIElement>;
 
-const TodoListItem = ({
+const CompletedTodoListItem = ({
   title,
   description,
   complete,
   toggleComplete,
 }: Props) => {
-  const [completeOverlayVisible, setCompleteOverlayVisible] = useState(false);
-
-  const handlers = useSwipeable({
-    onSwiped: () => setCompleteOverlayVisible(true),
-  });
-
   const triggerVibrate = () => {
     navigator.vibrate(1000);
   };
 
   return (
-    <TodoListItemContainer onClick={triggerVibrate} {...handlers}>
-      <div className="todo-item-container">
-        <Checkbox onChange={toggleComplete} />
+    <TodoListItemContainer onClick={triggerVibrate}>
+      <div className="completed-todo-item-container">
         <div className="todo-item-inner-container">
-          <Chip>진행중</Chip>
           <h3 className="todo-item-title">{title}</h3>
           <p className="todo-item-summary">{description}</p>
         </div>
-      </div>
-      <div className="todo-item-complete-overlay">
-        <span className="todo-item-compete-overlay-text">
-          이 일정을 정말 마무리할까요?
-        </span>
       </div>
     </TodoListItemContainer>
   );
@@ -77,4 +63,4 @@ const TodoListItemContainer = styled.li`
   }
 `;
 
-export default TodoListItem;
+export default CompletedTodoListItem;
