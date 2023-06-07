@@ -9,7 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
 import InputTodoDataStep from "./InputTodoDataStep";
-import SelectCategoryStep from "./SelectCategoryStep";
+import SelectTypeStep from "./SelectTypeStep";
 
 type Props = {} & ComponentProps<typeof Modal>;
 
@@ -20,8 +20,8 @@ type AddTodoStep = "카테고리" | "상세정보";
 const AddTodoModal = ({ open, onClose }: Props) => {
   const { data, mutate } = useMutation("uploadTodo", uploadTodo);
   const formMethods = useForm<Todo>();
-  const category = formMethods.watch("category");
-  console.log(category);
+  const type = formMethods.watch("type");
+  console.log(type);
 
   const handleClose = () => {
     formMethods.reset();
@@ -40,12 +40,11 @@ const AddTodoModal = ({ open, onClose }: Props) => {
     <Modal open={open} onClose={handleClose} title="새로운 일정을 등록해주세요">
       <FormProvider {...formMethods}>
         <ContentContainer>
-          {!category ? (
-            <SelectCategoryStep />
+          {!type ? (
+            <SelectTypeStep />
           ) : (
             <InputTodoDataStep onClose={handleClose} />
           )}
-          {/* {category && <SelectCategoryStep />} */}
         </ContentContainer>
       </FormProvider>
     </Modal>

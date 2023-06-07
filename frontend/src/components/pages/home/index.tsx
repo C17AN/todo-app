@@ -1,16 +1,17 @@
-import TodoListItem from "./TodoList/TodoListItem";
-import styled from "@emotion/styled";
-import Text from "@/components/common/Text";
-import AddTodoModal from "./TodoList/AddTodoModal";
 import Button from "@/components/common/Button";
-import ProgressBar from "./ProgressBar";
-import colors from "material-colors";
-import { useState } from "react";
+import Text from "@/components/common/Text";
 import { useSession } from "@/hooks/useSession";
 import { useListTodo } from "@/remotes/todo";
+import styled from "@emotion/styled";
+import colors from "material-colors";
+import { useState } from "react";
+
 import ImportantTodoSection from "./ImportantTodoSection";
 import MonthlyProgressSection from "./MonthlyProgressSection";
+import ProgressBar from "./ProgressBar";
 import ProjectSection from "./ProjectSection";
+import AddTodoModal from "./TodoList/AddTodoModal";
+import TodoListItem from "./TodoList/TodoListItem";
 import TodoSection from "./TodoSecion";
 
 const Home = () => {
@@ -34,21 +35,24 @@ const Home = () => {
       <section className="main-top-section">
         <section className="main-left-section">
           <ImportantTodoSection todoList={todoList} />
-          <section className="main-left-bottom-section">
+          <section
+            className="main-left-bottom-section"
+            onClick={() => setAddTodoModalOpen(() => true)}
+          >
             <Text
               typography="section-title"
               fontWeight="bold"
               color={colors.darkText.primary}
               className="section-title"
             >
-              레포트
+              새로운 계획
             </Text>
             <Text
               typography="section-description"
               fontWeight="semibold"
               color={colors.darkText.secondary}
             >
-              내 생활 패턴이 적절한지 파악해요
+              일정, 루틴 등을 추가해보세요.
             </Text>
             {/* {todoList.length > 0 && (
               <ProgressBar
@@ -61,9 +65,9 @@ const Home = () => {
         <ProjectSection todoList={todoList} />
       </section>
       <TodoSection todoList={todoList} />
-      <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
+      {/* <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
         할일 추가하기
-      </CTAButton>
+      </CTAButton> */}
       <AddTodoModal
         open={AddTodoModalOpen}
         onClose={() => setAddTodoModalOpen(() => false)}

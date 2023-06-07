@@ -51,8 +51,8 @@ const InputTodoDataStep = ({ onClose }: Props) => {
   });
 
   const submitTodo = async (data: Todo) => {
-    const { title, description, category } = data;
-    mutate({ title, description, category });
+    const { title, type, description, category } = data;
+    mutate({ title, type, description, category });
   };
 
   return (

@@ -24,7 +24,7 @@ const variant: Variants = {
   },
 };
 
-const SelectCategoryStep = (props: Props) => {
+const SelectTypeStep = (props: Props) => {
   const { setValue } = useFormContext();
 
   return (
@@ -38,35 +38,26 @@ const SelectCategoryStep = (props: Props) => {
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => setValue("category", "생활")}
+          onClick={() => setValue("type", "일정")}
         >
-          <img
-            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3E0.svg"
-            alt="생활"
-          />
-          생활
+          <h3 className="todo-type-name">일정</h3>
+          <p className="todo-type-description">일정을 추가해보세요.</p>
         </TodoCategory>
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => setValue("category", "학습")}
+          onClick={() => setValue("type", "루틴")}
         >
-          <img
-            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F4D6.svg"
-            alt="학습"
-          />
-          학습
+          <h3 className="todo-type-name">루틴</h3>
+          <p className="todo-type-description">일정을 추가해보세요.</p>
         </TodoCategory>
         <TodoCategory
           variants={variant}
           whileHover={"hover"}
-          onClick={() => setValue("category", "취미")}
+          onClick={() => setValue("type", "프로젝트")}
         >
-          <img
-            src="https://raw.githubusercontent.com/toss/tossface/main/dist/svg/u1F3AE.svg"
-            alt="취미"
-          />
-          취미
+          <h3 className="todo-type-name">프로젝트</h3>
+          <p className="todo-type-description">프로젝트를 추가해보세요.</p>
         </TodoCategory>
       </TodoCategoryContainer>
     </AnimatePresence>
@@ -76,28 +67,34 @@ const SelectCategoryStep = (props: Props) => {
 const TodoCategoryContainer = styled(motion.ul)`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const TodoCategory = styled(motion.li)`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75rem 4rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  padding: 1rem 0.875rem;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.5rem;
   font-weight: 600;
   font-size: 1.125rem;
   cursor: pointer;
-  color: ${colors.grey[300]};
+  color: ${colors.darkText.primary};
+
+  .todo-type-name {
+    margin-right: auto;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .todo-type-description {
+    font-size: 0.75rem;
+    color: ${colors.grey[500]};
+  }
 
   img {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 8px;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
-export default SelectCategoryStep;
+export default SelectTypeStep;
