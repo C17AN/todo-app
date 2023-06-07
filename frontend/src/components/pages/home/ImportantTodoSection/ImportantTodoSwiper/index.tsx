@@ -1,5 +1,6 @@
 import { Todo } from "@/models/Todo";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 import ImportantTodoListItem from "../ImportantTodoListItem";
 import styled from "@emotion/styled";
 import "swiper/css";
@@ -11,7 +12,12 @@ type Props = {
 
 const ImportantTodoSwiper = ({ todoList }: Props) => {
   return (
-    <StyledSwiper spaceBetween={10} slidesPerView={"auto"}>
+    <StyledSwiper
+      modules={[Pagination]}
+      spaceBetween={10}
+      slidesPerView={"auto"}
+      pagination={{ clickable: true }}
+    >
       {todoList.map((todo) => (
         <SwiperSlide key={todo.title}>
           <ImportantTodoListItem {...todo} />
@@ -23,12 +29,14 @@ const ImportantTodoSwiper = ({ todoList }: Props) => {
 
 const StyledSwiper = styled(Swiper)`
   box-sizing: border-box;
-  max-width: 100%;
   height: 100%;
   margin: 0;
 
+  .swiper-wrapper {
+    box-sizing: border-box;
+  }
+
   .swiper-slide {
-    width: 100%;
   }
 `;
 

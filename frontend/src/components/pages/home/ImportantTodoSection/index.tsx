@@ -10,39 +10,19 @@ type Props = {
   todoList: Todo[];
 };
 
-type SortByCondition = "우선순위" | "마감일";
-
 const ImportantTodoSection = ({ todoList }: Props) => {
-  const toggleSortByCondition = () => {
-    if (sortByCondition === "마감일") setSortByCondition(() => "우선순위");
-    else if (sortByCondition === "우선순위") setSortByCondition(() => "마감일");
-  };
-
-  const [sortByCondition, setSortByCondition] =
-    useState<SortByCondition>("우선순위");
-
   return (
     <Container className="main-left-top-section">
       {/* <Content> */}
       <TodayTodoFilter>
         <Text
-          typography="sm"
+          typography="section-title"
           fontWeight="bold"
           as="h4"
           color={colors.darkText.primary}
         >
           중요한 일정
         </Text>
-        {/* <button
-          className="sortby-condition-button"
-          onClick={toggleSortByCondition}
-        >
-          {sortByCondition === "우선순위" ? (
-            <div>우선순위</div>
-          ) : (
-            <div>마감일</div>
-          )}
-        </button> */}
       </TodayTodoFilter>
 
       {todoList.length > 0 ? (
@@ -67,7 +47,8 @@ const Container = styled.section`
   background: #daeaf6;
   display: flex;
   flex-direction: column;
-  padding: 14px 18px;
+  padding: 12px 14px;
+  box-sizing: border-box;
   border-radius: 12px;
   flex: 5;
 `;
@@ -76,19 +57,6 @@ const TodayTodoFilter = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 0.5rem;
-
-  .sortby-condition-button {
-    margin-left: auto;
-    font-size: 0.625rem;
-    min-width: 3rem;
-    border: 0;
-    outline: 0;
-    padding: 4px 8px;
-    font-weight: 600;
-    border-radius: 4px;
-    background: ${colors.grey["200"]};
-    color: ${colors.darkText.secondary};
-  }
 `;
 
 const EmptyTodoList = styled.div`
@@ -110,12 +78,8 @@ const EmptyTodoList = styled.div`
 const TodayTodoList = styled.ul`
   width: 100%;
   height: 100%;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  box-sizing: border-box;
   border-radius: 12px;
-  overflow: hidden;
 `;
 
 export default ImportantTodoSection;

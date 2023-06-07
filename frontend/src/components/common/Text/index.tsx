@@ -12,7 +12,7 @@ type Props = {
     | "p"
     | "sm"
     | "section-title"
-    | "grey-description";
+    | "section-description";
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "li" | "p" | "span" | "div";
   fontWeight?:
     | "extrabold"

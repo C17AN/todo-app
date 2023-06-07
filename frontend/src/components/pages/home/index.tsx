@@ -11,6 +11,7 @@ import { useListTodo } from "@/remotes/todo";
 import ImportantTodoSection from "./ImportantTodoSection";
 import MonthlyProgressSection from "./MonthlyProgressSection";
 import ProjectSection from "./ProjectSection";
+import TodoSection from "./TodoSecion";
 
 const Home = () => {
   const session = useSession();
@@ -34,30 +35,32 @@ const Home = () => {
         <section className="main-left-section">
           <ImportantTodoSection todoList={todoList} />
           <section className="main-left-bottom-section">
-            {todoList.length > 0 && (
+            <Text
+              typography="section-title"
+              fontWeight="bold"
+              color={colors.darkText.primary}
+              className="section-title"
+            >
+              레포트
+            </Text>
+            <Text
+              typography="section-description"
+              fontWeight="semibold"
+              color={colors.darkText.secondary}
+            >
+              내 생활 패턴이 적절한지 파악해요
+            </Text>
+            {/* {todoList.length > 0 && (
               <ProgressBar
                 totalTodoCount={todoList.length}
                 resolvedTodoCount={todoList.length}
               />
-            )}
+            )} */}
           </section>
         </section>
         <ProjectSection todoList={todoList} />
       </section>
-      <section className="main-middle-section">
-        <Text
-          typography="h3"
-          fontWeight="semibold"
-          color={colors.darkText.primary}
-        >
-          다가오는 일정
-        </Text>
-        <TodayTodoList>
-          {todoList.map((todo, index) => (
-            <TodoListItem key={todo.title + index} {...todo} />
-          ))}
-        </TodayTodoList>
-      </section>
+      <TodoSection todoList={todoList} />
       <CTAButton size="cta" onClick={() => setAddTodoModalOpen(() => true)}>
         할일 추가하기
       </CTAButton>
@@ -70,7 +73,7 @@ const Home = () => {
 };
 
 const Container = styled.div`
-  padding: 24px 12px 0 12px;
+  padding: 24px 16px 0 16px;
 
   .main-top-section {
     gap: 10px;
@@ -80,7 +83,7 @@ const Container = styled.div`
   }
 
   .main-left-section {
-    flex: 6;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -88,14 +91,18 @@ const Container = styled.div`
 
   .main-left-bottom-section {
     background: #fce1e4;
-    padding: 18px;
+    padding: 12px 14px;
     border-radius: 12px;
     flex: 2;
+
+    .section-title {
+      margin-bottom: 4px;
+    }
   }
 
   .main-right-section {
-    flex: 4;
-    padding: 16px;
+    max-width: 40%;
+    padding: 14px;
     background: #ddedea;
     border-radius: 12px;
     box-shadow: 1px 1px 4px 0px ${colors.grey[200]};

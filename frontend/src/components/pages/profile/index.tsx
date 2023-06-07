@@ -11,7 +11,7 @@ const Profile = (props: Props) => {
   return (
     <Container>
       <div>{session?.user.user_metadata.name}</div>
-      <Text typography="grey-description">계획적인 직장인</Text>
+      <Text typography="section-description">계획적인 직장인</Text>
       <ul>
         <ListRow title="내 정보" />
       </ul>

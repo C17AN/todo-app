@@ -1,13 +1,50 @@
-import React from "react";
+import styled from "@emotion/styled";
+import colors from "material-colors";
+import { ReactNode, useState } from "react";
+import { HiSortDescending } from "@react-icons/all-files/hi/HiSortDescending";
 
-type Props = {};
+type Props<T> = {
+  icon?: ReactNode;
+  onClick: () => void;
+  toggleOptions: T[];
+};
 
-const SortByButton = (props: Props) => {
+const ToggleButton = ({ icon, onClick, toggleOptions }: Props<string>) => {
+  const [option, setOption] = useState(toggleOptions[0]);
+
+  const handleClick = () => {
+    if (option === toggleOptions[0]) {
+      setOption(() => toggleOptions[1]);
+    }
+    if (option === toggleOptions[1]) {
+      setOption(() => toggleOptions[0]);
+    }
+    onClick();
+  };
+
   return (
-    // <button className="sortby-condition-button" onClick={toggleSortByCondition}>
-    //   {sortByCondition === "우선순위" ? <div>우선순위</div> : <div>마감일</div>}
-    // </button>
+    <Container onClick={handleClick}>
+      {icon && <HiSortDescending />}
+      {option === toggleOptions[0] ? (
+        <div>{toggleOptions[0]}</div>
+      ) : (
+        <div>{toggleOptions[1]}</div>
+      )}
+    </Container>
   );
 };
 
-export default SortByButton;
+const Container = styled.button`
+  margin-left: auto;
+  font-size: 0.625rem;
+  min-width: 3rem;
+  border: 0;
+  outline: 0;
+  padding: 4px 8px;
+  font-weight: 600;
+  border-radius: 4px;
+  background: ${colors.grey["200"]};
+  color: ${colors.darkText.secondary};
+`;
+
+export default ToggleButton;
