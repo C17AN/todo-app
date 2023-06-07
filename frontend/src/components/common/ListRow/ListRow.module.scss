@@ -1,2 +1,16 @@
+@import "@/styles/colors.scss";
+
 .list-row {
+}
+
+.list-row-title {
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: $md-dark-text-primary;
+}
+
+.list-row-description {
+  font-weight: 600;
+  font-size: 12px;
+  color: $md-grey-400;
 }

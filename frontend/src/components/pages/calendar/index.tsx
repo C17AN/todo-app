@@ -6,7 +6,7 @@ type Props = {};
 const Calendar = (props: Props) => {
   return (
     <div>
-      <ReactCalendar />
+      <ReactCalendar defaultView="month" />
     </div>
   );
 };

@@ -7,11 +7,11 @@ interface Props extends HTMLAttributes<HTMLLIElement> {
   description?: string;
 }
 
-const ListRow = ({ title, description }: Props) => {
+const ListRow = ({ title, description, ...rest }: Props) => {
   return (
-    <li>
-      <h3>{title}</h3>
-      <div>{description}</div>
+    <li className={cx(style["list-row"])} {...rest}>
+      <h3 className={cx(style["list-row-title"])}>{title}</h3>
+      <div className={cx(style["list-row-description"])}>{description}</div>
     </li>
   );
 };

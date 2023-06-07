@@ -8,6 +8,7 @@ interface Props {
   size?: "tiny" | "small" | "medium" | "large" | "cta";
   type?: "primary" | "disabled";
   className?: string;
+  id?: string;
   onClick: () => void;
   disabled?: boolean;
   loading?: boolean;
@@ -27,6 +28,7 @@ const variants: Variants = {
 const Button = ({
   children,
   className,
+  id,
   type = "primary",
   size = "medium",
   onClick,
@@ -45,6 +47,7 @@ const Button = ({
     <motion.button
       variants={variants}
       whileHover={!disabled ? "hover" : undefined}
+      id={id}
       className={cx(
         style.button,
         style[buttonSize],
