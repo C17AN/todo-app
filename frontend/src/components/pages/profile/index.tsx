@@ -30,12 +30,17 @@ const Profile = (props: Props) => {
         />
         <ListRow
           title="테마 설정"
+          description="테마를 선택할 수 있어요."
+          className="menu-list-item"
+        />
+        <ListRow
+          title="언어 설정"
           description="내 정보를 관리할 수 있어요."
           className="menu-list-item"
         />
         <ListRow
           title="개인정보처리방침"
-          description="내 정보를 관리할 수 있어요."
+          description="내 정보가 어떻게 사용되는지 확인해보세요."
           className="menu-list-item"
         />
       </ul>

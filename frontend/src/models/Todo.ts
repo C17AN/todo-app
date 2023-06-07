@@ -12,4 +12,9 @@ export type Todo = {
   createdAt?: string;
   updatedAt?: string;
   deadline?: Date;
+  point?: number;
 };
+
+// 포인트 (예시)
+// 월 300점이 유저에게 부여된다.
+// 일정당 최대 10포인트를 부여할 수 있다.

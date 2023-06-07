@@ -1,23 +1,24 @@
 import BottomNavigation from "@/components/common/BottomNavigation";
 import { LAYOUT_ID } from "@/constants/ui";
-import className from "classnames/bind";
-import { HTMLMotionProps, motion } from "framer-motion";
-import { ReactNode } from "react";
+import cx from "classnames";
+import { HTMLAttributes, ReactNode } from "react";
 
 import style from "./Layout.module.scss";
 
-const cx = className.bind(style);
-
-interface Props extends HTMLMotionProps<"div"> {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
 const LayoutWithBottomNavigation = ({ children, ...rest }: Props) => {
   return (
     <>
-      <motion.div className={cx("layout")} id={LAYOUT_ID} {...rest}>
+      <div
+        {...rest}
+        className={cx(style.layout, rest.className)}
+        id={LAYOUT_ID}
+      >
         {children}
-      </motion.div>
+      </div>
       <BottomNavigation />
     </>
   );

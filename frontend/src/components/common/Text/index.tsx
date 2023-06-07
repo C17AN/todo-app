@@ -1,4 +1,5 @@
 import { ReactNode, memo } from "react";
+
 import style from "./Text.module.scss";
 
 type Props = {

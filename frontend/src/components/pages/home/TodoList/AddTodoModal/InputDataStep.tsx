@@ -34,7 +34,7 @@ const variant: Variants = {
   },
 };
 
-const InputTodoDataStep = ({ onClose }: Props) => {
+const InputDataStep = ({ onClose }: Props) => {
   const { register, handleSubmit } = useFormContext();
   const { mutate, isLoading } = useMutation(uploadTodo, {
     onSuccess() {
@@ -77,6 +77,12 @@ const InputTodoDataStep = ({ onClose }: Props) => {
             className="input-content"
             {...register("description")}
           />
+          <TextArea
+            placeholder="부여할 포인트를 입력해주세요"
+            label="포인트"
+            className="input-content"
+            {...register("point")}
+          />
         </InputContainer>
         <Button
           size="cta"
@@ -105,4 +111,4 @@ const InputContainer = styled.div`
   }
 `;
 
-export default InputTodoDataStep;
+export default InputDataStep;
