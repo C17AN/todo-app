@@ -1,0 +1,14 @@
+@import "@/styles/colors.scss";
+
+.important-todo-swiper {
+  .swiper-pagination-bullet {
+    height: 4px;
+    width: 12px;
+    border-radius: 4px;
+    margin: 0 4px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: $md-grey-600;
+  }
+}

@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import ImportantTodoListItem from "../ImportantTodoListItem";
 import styled from "@emotion/styled";
+import "./importantTodoSwiper.scss";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -13,6 +14,7 @@ type Props = {
 const ImportantTodoSwiper = ({ todoList }: Props) => {
   return (
     <StyledSwiper
+      className="important-todo-swiper"
       modules={[Pagination]}
       spaceBetween={10}
       slidesPerView={"auto"}
