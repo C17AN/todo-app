@@ -1,9 +1,9 @@
-import { HTMLAttributes } from "react";
-import styled from "@emotion/styled";
-import { Todo } from "src/models/Todo";
-import colors from "material-colors";
 import Checkbox from "@/components/common/CheckBox";
 import Chip from "@/components/common/Chip";
+import styled from "@emotion/styled";
+import colors from "material-colors";
+import { HTMLAttributes } from "react";
+import { Todo } from "src/models/Todo";
 
 type Props = {
   complete: boolean;

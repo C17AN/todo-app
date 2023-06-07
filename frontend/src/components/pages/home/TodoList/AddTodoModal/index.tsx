@@ -1,14 +1,15 @@
 import Modal from "@/components/common/Modal";
+import { Todo, TodoCategory as TodoCategoryType } from "@/models/Todo";
+import { uploadTodo } from "@/remotes/todo";
 import styled from "@emotion/styled";
+import { Variants, motion } from "framer-motion";
 import colors from "material-colors";
 import { ComponentProps, useState } from "react";
-import { Variants, motion } from "framer-motion";
-import { Todo, TodoCategory as TodoCategoryType } from "@/models/Todo";
-import { useMutation } from "react-query";
-import { uploadTodo } from "@/remotes/todo";
 import { FormProvider, useForm } from "react-hook-form";
-import SelectCategoryStep from "./SelectCategoryStep";
+import { useMutation } from "react-query";
+
 import InputTodoDataStep from "./InputTodoDataStep";
+import SelectCategoryStep from "./SelectCategoryStep";
 
 type Props = {} & ComponentProps<typeof Modal>;
 
@@ -39,7 +40,11 @@ const AddTodoModal = ({ open, onClose }: Props) => {
     <Modal open={open} onClose={handleClose} title="새로운 일정을 등록해주세요">
       <FormProvider {...formMethods}>
         <ContentContainer>
-          {!category ? <SelectCategoryStep /> : <InputTodoDataStep />}
+          {!category ? (
+            <SelectCategoryStep />
+          ) : (
+            <InputTodoDataStep onClose={handleClose} />
+          )}
           {/* {category && <SelectCategoryStep />} */}
         </ContentContainer>
       </FormProvider>

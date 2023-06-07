@@ -1,15 +1,15 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import TextArea from "@/components/common/TextArea";
-import styled from "@emotion/styled";
-import colors from "material-colors";
-import { useFormContext } from "react-hook-form";
-import { AnimatePresence, Variants, motion } from "framer-motion";
 import { Todo } from "@/models/Todo";
 import { uploadTodo } from "@/remotes/todo";
-import { useMutation } from "react-query";
+import styled from "@emotion/styled";
 import { PostgrestError } from "@supabase/supabase-js";
+import { AnimatePresence, Variants, motion } from "framer-motion";
+import colors from "material-colors";
+import { useFormContext } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
+import { useMutation } from "react-query";
 
 type Props = {
   onClose: () => void;

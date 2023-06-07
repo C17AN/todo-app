@@ -1,5 +1,5 @@
-import { useMutation } from "react-query";
 import { supabaseClient } from "@/config/supabaseClient";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
 export const signOut = async () => {

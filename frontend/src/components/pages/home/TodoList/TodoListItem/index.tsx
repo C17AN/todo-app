@@ -1,10 +1,11 @@
-import { HTMLAttributes, useState } from "react";
-import styled from "@emotion/styled";
-import { Todo } from "src/models/Todo";
-import colors from "material-colors";
 import Checkbox from "@/components/common/CheckBox";
 import Chip from "@/components/common/Chip";
+import styled from "@emotion/styled";
+import { AnimatePresence, motion } from "framer-motion";
+import colors from "material-colors";
+import { HTMLAttributes, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import { Todo } from "src/models/Todo";
 
 type Props = {
   complete: boolean;
@@ -21,7 +22,11 @@ const TodoListItem = ({
   const [completeOverlayVisible, setCompleteOverlayVisible] = useState(false);
 
   const handlers = useSwipeable({
-    onSwiped: () => setCompleteOverlayVisible(true),
+    onSwipedLeft: (e) => {
+      console.log(e);
+      setCompleteOverlayVisible(true);
+    },
+    onSwipedRight: () => setCompleteOverlayVisible(false),
   });
 
   const triggerVibrate = () => {
@@ -33,16 +38,31 @@ const TodoListItem = ({
       <div className="todo-item-container">
         <Checkbox onChange={toggleComplete} />
         <div className="todo-item-inner-container">
-          <Chip>진행중</Chip>
+          <div className="todo-item-top-container">
+            <div className="todo-item-countdown">마감까지 53분</div>
+            <Chip className="chip">진행중</Chip>
+          </div>
           <h3 className="todo-item-title">{title}</h3>
-          <p className="todo-item-summary">{description}</p>
+          {/* <p className="todo-item-summary">{description}</p> */}
         </div>
       </div>
-      <div className="todo-item-complete-overlay">
-        <span className="todo-item-compete-overlay-text">
-          이 일정을 정말 마무리할까요?
-        </span>
-      </div>
+      <AnimatePresence>
+        {completeOverlayVisible && (
+          <motion.div
+            animate={completeOverlayVisible && { opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            className="todo-item-complete-overlay"
+          >
+            <span className="todo-item-compete-overlay-text">
+              <div className="todo-item-compete-overlay-title">완료 확인</div>
+              <div className="todo-item-compete-overlay-description">
+                이 일정을 정말 마무리할까요?
+              </div>
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </TodoListItemContainer>
   );
 };
@@ -54,6 +74,8 @@ const TodoListItemContainer = styled.li`
   padding: 12px;
   margin-bottom: 8px;
   border-radius: 8px;
+  position: relative;
+  width: 100%;
 
   .todo-item-container {
     display: flex;
@@ -62,9 +84,25 @@ const TodoListItemContainer = styled.li`
 
   .todo-item-inner-container {
     margin-left: 8px;
+    width: 100%;
+
+    .todo-item-top-container {
+      display: flex;
+      align-items: center;
+
+      .chip {
+        margin-left: auto;
+      }
+    }
+
+    .todo-item-countdown {
+      font-size: 0.625rem;
+      color: ${colors.grey[600]};
+      font-weight: 300;
+    }
 
     .todo-item-title {
-      margin-top: 8px;
+      margin-top: 4px;
       margin-bottom: 6px;
       font-size: 0.8rem;
       font-weight: 700;
@@ -73,6 +111,35 @@ const TodoListItemContainer = styled.li`
 
     .todo-item-summary {
       font-size: 0.75rem;
+    }
+  }
+
+  .todo-item-complete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    transition: 0.2s ease-in-out all;
+
+    .todo-item-compete-overlay-text {
+      font-weight: 600;
+      color: ${colors.darkText.primary};
+
+      .todo-item-compete-overlay-title {
+        margin-bottom: 6px;
+        font-size: 0.75rem;
+      }
+
+      .todo-item-compete-overlay-description {
+        font-size: 0.625rem;
+        color: ${colors.grey[500]};
+      }
     }
   }
 `;
