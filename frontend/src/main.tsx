@@ -1,7 +1,8 @@
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import { pageTransitionVariant } from "./animations/pageTransition.ts";
@@ -17,90 +18,109 @@ import SignInPage from "./pages/signIn.tsx";
 import SignUpPage from "./pages/signUp.tsx";
 import "./styles/global.scss";
 import "./styles/reset.css";
+import "./styles/route-animation.scss";
 
 const queryClient = new QueryClient();
 
+const Root = () => {
+  const location = useLocation();
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [transitionStage, setTransistionStage] = useState("fadeIn");
+
+  useEffect(() => {
+    if (location !== displayLocation) setTransistionStage("fadeOut");
+  }, [location, displayLocation]);
+
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <SessionProvider>
+          {/* <TransitionGroup className="transitions-wrapper">
+            <CSSTransition
+              in={true}
+              key={location.pathname}
+              classNames={"page"}
+              timeout={300}
+            > */}
+          {/* Note: react-transition-group 없이도 라우팅 애니메이션을 적용할 수 있다. */}
+          {/* Ref: https://dev.to/fazliddin04/react-router-v6-animated-transitions-diy-3e6l */}
+          <span
+            onAnimationEnd={() => {
+              if (transitionStage === "fadeOut") {
+                setTransistionStage("fadeIn");
+                setDisplayLocation(location);
+              }
+            }}
+          >
+            <Routes location={displayLocation}>
+              <Route
+                path="/"
+                element={
+                  <LayoutWithBottomNavigation className={`${transitionStage}`}>
+                    <HomePage />
+                  </LayoutWithBottomNavigation>
+                }
+              />
+              <Route
+                path="/signIn"
+                element={
+                  <LayoutWithoutBottomNavigation>
+                    <SignInPage />
+                  </LayoutWithoutBottomNavigation>
+                }
+              />
+              <Route
+                path="/signUp"
+                element={
+                  <LayoutWithoutBottomNavigation>
+                    <SignUpPage />
+                  </LayoutWithoutBottomNavigation>
+                }
+              />
+              <Route
+                path="/bookmark"
+                element={
+                  <LayoutWithBottomNavigation className={`${transitionStage}`}>
+                    <BookmarkPage />
+                  </LayoutWithBottomNavigation>
+                }
+              />
+              <Route
+                path="/calendar"
+                element={
+                  <LayoutWithBottomNavigation className={`${transitionStage}`}>
+                    <CalendarPage />
+                  </LayoutWithBottomNavigation>
+                }
+              />
+              <Route
+                path="/project"
+                element={
+                  <LayoutWithBottomNavigation className={`${transitionStage}`}>
+                    <ProjectPage />
+                  </LayoutWithBottomNavigation>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <LayoutWithBottomNavigation className={`${transitionStage}`}>
+                    <ProfilePage />
+                  </LayoutWithBottomNavigation>
+                }
+              />
+            </Routes>
+          </span>
+          {/* </CSSTransition>
+          </TransitionGroup> */}
+        </SessionProvider>
+      </QueryClientProvider>
+    </>
+  );
+};
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <SessionProvider>
-        <AnimatePresence>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <LayoutWithBottomNavigation
-                  variants={pageTransitionVariant}
-                  initial="hidden"
-                  animate="enter"
-                  exit="exit"
-                >
-                  <HomePage />
-                </LayoutWithBottomNavigation>
-              }
-            />
-            <Route
-              path="/signIn"
-              element={
-                <LayoutWithoutBottomNavigation
-                  variants={pageTransitionVariant}
-                  initial="hidden"
-                  animate="enter"
-                  exit="exit"
-                >
-                  <SignInPage />
-                </LayoutWithoutBottomNavigation>
-              }
-            />
-            <Route
-              path="/signUp"
-              element={
-                <LayoutWithoutBottomNavigation
-                  variants={pageTransitionVariant}
-                  initial="hidden"
-                  animate="enter"
-                  exit="exit"
-                >
-                  <SignUpPage />
-                </LayoutWithoutBottomNavigation>
-              }
-            />
-            <Route
-              path="/bookmark"
-              element={
-                <LayoutWithBottomNavigation>
-                  <BookmarkPage />
-                </LayoutWithBottomNavigation>
-              }
-            />
-            <Route
-              path="/calendar"
-              element={
-                <LayoutWithBottomNavigation>
-                  <CalendarPage />
-                </LayoutWithBottomNavigation>
-              }
-            />
-            <Route
-              path="/project"
-              element={
-                <LayoutWithBottomNavigation>
-                  <ProjectPage />
-                </LayoutWithBottomNavigation>
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <LayoutWithBottomNavigation>
-                  <ProfilePage />
-                </LayoutWithBottomNavigation>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
-      </SessionProvider>
-      {/* <RouterProvider router={router} /> */}
-    </BrowserRouter>
-  </QueryClientProvider>
+  <BrowserRouter>
+    <Root />
+  </BrowserRouter>
 );

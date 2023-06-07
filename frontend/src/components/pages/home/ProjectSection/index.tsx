@@ -1,7 +1,7 @@
 import Text from "@/components/common/Text";
 import { Todo } from "@/models/Todo";
-import colors from "material-colors";
 import styled from "@emotion/styled";
+import colors from "material-colors";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
