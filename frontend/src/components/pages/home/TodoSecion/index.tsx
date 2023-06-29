@@ -1,11 +1,12 @@
+import ToggleButton from "@/components/common/SortByButton";
 import Text from "@/components/common/Text";
-import colors from "material-colors";
-import { useState } from "react";
-import TodoListItem from "../TodoList/TodoListItem";
 import { Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
-import ToggleButton from "@/components/common/SortByButton";
+import colors from "material-colors";
+import { useState } from "react";
+
 import CompletedTodoListItem from "../TodoList/CompletedTodoListItem";
+import TodoListItem from "../TodoList/TodoListItem";
 
 type Props = {
   todoList: Todo[];

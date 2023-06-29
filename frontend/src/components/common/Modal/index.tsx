@@ -1,10 +1,15 @@
-import { ReactNode } from "react";
-import style from "./Modal.module.scss";
-import classNames from "classnames/bind";
-import Button from "../Button";
-import styled from "@emotion/styled";
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import { useGetBoundingClientRect } from "@/hooks/useBoundingClientRect";
 import { useDisableScrollOnModalOpen } from "@/hooks/useDisableScrollOnModalOpen";
+import { useScreenSize } from "@/hooks/useScreenSize";
+import styled from "@emotion/styled";
+import { HiOutlineX } from "@react-icons/all-files/hi/HiOutlineX";
+import classNames from "classnames/bind";
+import { AnimatePresence, Variants, motion, useAnimate } from "framer-motion";
+import { ReactNode, useEffect } from "react";
+import { createPortal } from "react-dom";
+
+import Button from "../Button";
+import style from "./Modal.module.scss";
 
 const cx = classNames.bind(style);
 
@@ -14,6 +19,7 @@ type Props = {
   title?: string;
   children?: ReactNode;
   confirmButton?: ReactNode;
+  type?: "normal" | "full";
 };
 
 const backdropVariants: Variants = {
@@ -31,7 +37,8 @@ const backdropVariants: Variants = {
 const modalVariants: Variants = {
   initial: {
     opacity: 0,
-    y: 20,
+    y: 40,
+    borderRadius: 8,
   },
   open: {
     opacity: 1,
@@ -46,11 +53,20 @@ const modalVariants: Variants = {
   },
 };
 
-const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
+const Modal = ({
+  open,
+  onClose,
+  title,
+  children,
+  confirmButton,
+  type,
+}: Props) => {
   useDisableScrollOnModalOpen(open);
+  const fullModal = type === "full";
+  const { width: screenWidth, height: screenHeight } = useScreenSize();
 
   return (
-    <>
+    <Portal>
       <AnimatePresence>
         {open && (
           <>
@@ -62,27 +78,68 @@ const Modal = ({ open, onClose, title, children, confirmButton }: Props) => {
               className={cx("backdrop")}
               onClick={onClose}
             />
-            <div className={cx("modal-container")}>
-              <motion.div
-                variants={modalVariants}
-                initial="initial"
-                animate="open"
-                exit="close"
-                className={cx("modal")}
-              >
-                {title && <h4 className={cx("modal-title")}>{title}</h4>}
-                {children}
-                {confirmButton ? (
-                  <ConfirmButton size="small" onClick={() => {}}>
-                    확인
-                  </ConfirmButton>
-                ) : null}
-              </motion.div>
-            </div>
+            <motion.div className={cx("modal-container")} layout>
+              {!fullModal ? (
+                <motion.div
+                  layoutId="default"
+                  variants={modalVariants}
+                  initial="initial"
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  exit="close"
+                  className={cx("modal")}
+                >
+                  {fullModal && (
+                    <HiOutlineX
+                      className={cx("close-icon")}
+                      onClick={onClose}
+                    />
+                  )}
+                  {title && <h4 className={cx("modal-title")}>{title}</h4>}
+                  {children}
+                  {confirmButton ? (
+                    <ConfirmButton size="small" onClick={() => {}}>
+                      확인
+                    </ConfirmButton>
+                  ) : null}
+                </motion.div>
+              ) : (
+                <motion.div
+                  layoutId="full"
+                  variants={modalVariants}
+                  initial="initial"
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    width: screenWidth,
+                    height: screenHeight,
+                    borderRadius: fullModal ? 0 : 8,
+                  }}
+                  exit="close"
+                  className={cx("modal")}
+                >
+                  {fullModal && (
+                    <HiOutlineX
+                      className={cx("close-icon")}
+                      onClick={onClose}
+                    />
+                  )}
+                  {title && <h4 className={cx("modal-title")}>{title}</h4>}
+                  {children}
+                  {confirmButton ? (
+                    <ConfirmButton size="small" onClick={() => {}}>
+                      확인
+                    </ConfirmButton>
+                  ) : null}
+                </motion.div>
+              )}
+            </motion.div>
           </>
         )}
       </AnimatePresence>
-    </>
+    </Portal>
   );
 };
 
@@ -91,5 +148,10 @@ const ConfirmButton = styled(Button)`
   margin-top: 12px;
   margin-left: auto;
 `;
+
+const Portal = ({ children }: { children: ReactNode }) => {
+  const el = document.getElementById("modal-root") as HTMLElement;
+  return createPortal(children, el);
+};
 
 export default Modal;

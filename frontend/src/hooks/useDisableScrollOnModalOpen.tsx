@@ -1,17 +1,12 @@
-import { LAYOUT_ID } from "@/constants/ui";
 import { useEffect } from "react";
 
 export const useDisableScrollOnModalOpen = (open: boolean) => {
   useEffect(() => {
-    const layout = document.getElementById(LAYOUT_ID);
+    const body = document.body;
     if (open) {
-      if (layout) {
-        layout.style.maxHeight = "100vh";
-      }
+      body.style.overflow = "hidden";
     } else {
-      if (layout) {
-        layout.style.maxHeight = "100%";
-      }
+      body.style.overflow = "unset";
     }
   }, [open]);
 };

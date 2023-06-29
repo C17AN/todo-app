@@ -1,5 +1,6 @@
-import { HTMLAttributes, ReactNode, forwardRef } from "react";
 import cx from "classnames";
+import { HTMLAttributes, ReactNode, forwardRef } from "react";
+
 import style from "./Input.module.scss";
 
 interface Props extends HTMLAttributes<HTMLInputElement> {
@@ -8,20 +9,32 @@ interface Props extends HTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   className?: string;
   bottomText?: string | ReactNode;
+  children?: ReactNode;
 }
 
 const Input = forwardRef<any, Props>(
-  ({ label, error, disabled, className, bottomText, ...rest }, ref) => {
+  (
+    { label, error, disabled, className, bottomText, children, ...rest },
+    ref
+  ) => {
     return (
       <>
         {label && <p className={style["input-label"]}>{label}</p>}
-        <input
-          ref={ref}
-          className={cx(style.input, error && style["input-error"], className)}
-          disabled={disabled}
-          autoComplete="off"
-          {...rest}
-        />
+        {children ? (
+          children
+        ) : (
+          <input
+            ref={ref}
+            className={cx(
+              style.input,
+              error && style["input-error"],
+              className
+            )}
+            disabled={disabled}
+            autoComplete="off"
+            {...rest}
+          />
+        )}
         {bottomText &&
           (typeof bottomText === "string" ? <p>{bottomText}</p> : bottomText)}
       </>

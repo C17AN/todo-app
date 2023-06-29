@@ -3,8 +3,6 @@ import { AnimatePresence, Variants, motion } from "framer-motion";
 import colors from "material-colors";
 import { useFormContext } from "react-hook-form";
 
-type Props = {};
-
 const variant: Variants = {
   hover: {
     scale: 0.95,
@@ -24,7 +22,7 @@ const variant: Variants = {
   },
 };
 
-const SelectTypeStep = (props: Props) => {
+const SelectTypeStep = () => {
   const { setValue } = useFormContext();
 
   return (

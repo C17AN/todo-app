@@ -41,17 +41,19 @@ const SignIn = () => {
         <br />
         <span className="title-text">일정관리</span>
       </Title>
-      <LoginInfoInput
-        label="이메일"
-        placeholder="이메일을 입력해주세요"
-        {...register("email")}
-      />
-      <LoginInfoInput
-        label="비밀번호"
-        type="password"
-        placeholder="비밀번호를 입력해주세요"
-        {...register("password")}
-      />
+      <form onSubmit={handleSignIn}>
+        <LoginInfoInput
+          label="이메일"
+          placeholder="이메일을 입력해주세요"
+          {...register("email")}
+        />
+        <LoginInfoInput
+          label="비밀번호"
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+          {...register("password")}
+        />
+      </form>
       <SignUpLink to="/signUp">
         <Text typography="sm">아직 회원이 아니신가요?</Text>
       </SignUpLink>

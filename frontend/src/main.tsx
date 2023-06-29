@@ -1,11 +1,8 @@
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import { pageTransitionVariant } from "./animations/pageTransition.ts";
 import { SessionProvider } from "./hooks/useSession.tsx";
 import LayoutWithBottomNavigation from "./layout/LayoutWithBottomNavigation.tsx";
 import LayoutWithoutBottomNavigation from "./layout/LayoutWithoutBottomNavigation.tsx";
@@ -19,6 +16,11 @@ import SignUpPage from "./pages/signUp.tsx";
 import "./styles/global.scss";
 import "./styles/reset.css";
 import "./styles/route-animation.scss";
+
+useLocation;
+
+// import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+useLocation;
 
 const queryClient = new QueryClient();
 

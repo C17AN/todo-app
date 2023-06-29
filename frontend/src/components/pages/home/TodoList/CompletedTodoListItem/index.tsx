@@ -1,5 +1,3 @@
-import Checkbox from "@/components/common/CheckBox";
-import Chip from "@/components/common/Chip";
 import styled from "@emotion/styled";
 import colors from "material-colors";
 import { HTMLAttributes } from "react";
@@ -7,16 +5,11 @@ import { Todo } from "src/models/Todo";
 
 type Props = {
   complete: boolean;
-  toggleComplete: () => boolean;
+  toggleComplete?: () => boolean;
 } & Todo &
   HTMLAttributes<HTMLLIElement>;
 
-const CompletedTodoListItem = ({
-  title,
-  description,
-  complete,
-  toggleComplete,
-}: Props) => {
+const CompletedTodoListItem = ({ title, description }: Props) => {
   const triggerVibrate = () => {
     navigator.vibrate(1000);
   };

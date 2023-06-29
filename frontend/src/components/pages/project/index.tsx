@@ -10,7 +10,7 @@ const Project = (props: Props) => {
   return (
     <Container>
       <Text fontWeight="bold" typography="h3" className="section-title">
-        프로젝트
+        내 프로젝트
       </Text>
       <Text
         fontWeight="semibold"

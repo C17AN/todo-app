@@ -1,6 +1,7 @@
 import Checkbox from "@/components/common/CheckBox";
 import Chip from "@/components/common/Chip";
 import styled from "@emotion/styled";
+import { set } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import colors from "material-colors";
 import { HTMLAttributes, useState } from "react";
@@ -9,17 +10,13 @@ import { Todo } from "src/models/Todo";
 
 type Props = {
   complete: boolean;
-  toggleComplete: () => boolean;
+  toggleComplete?: () => boolean;
 } & Todo &
   HTMLAttributes<HTMLLIElement>;
 
-const TodoListItem = ({
-  title,
-  description,
-  complete,
-  toggleComplete,
-}: Props) => {
+const TodoListItem = ({ title, toggleComplete }: Props) => {
   const [completeOverlayVisible, setCompleteOverlayVisible] = useState(false);
+  const [todoDetailFullModalOpen, setTodoDetailFullModalOpen] = useState(false);
 
   const handlers = useSwipeable({
     onSwipedLeft: (e) => {
@@ -29,12 +26,16 @@ const TodoListItem = ({
     onSwipedRight: () => setCompleteOverlayVisible(false),
   });
 
-  const triggerVibrate = () => {
-    navigator.vibrate(1000);
+  const handleClick = () => {
+    setTodoDetailFullModalOpen(true);
   };
 
+  // const triggerVibrate = () => {
+  //   navigator.vibrate(1000);
+  // };
+
   return (
-    <TodoListItemContainer onClick={triggerVibrate} {...handlers}>
+    <TodoListItemContainer onClick={handleClick} {...handlers}>
       <div className="todo-item-container">
         <Checkbox onChange={toggleComplete} />
         <div className="todo-item-inner-container">

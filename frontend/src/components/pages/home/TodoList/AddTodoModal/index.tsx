@@ -1,3 +1,4 @@
+import FullModal from "@/components/common/FullModal";
 import Modal from "@/components/common/Modal";
 import { Todo } from "@/models/Todo";
 import { uploadTodo } from "@/remotes/todo";
@@ -23,7 +24,12 @@ const AddTodoModal = ({ open, onClose }: Props) => {
   };
 
   return (
-    <Modal open={open} onClose={handleClose} title="새로운 일정을 등록해주세요">
+    <Modal
+      type={type && "full"}
+      open={open}
+      onClose={handleClose}
+      title={!type ? "새로운 일정을 등록해주세요" : "오늘 할 일을 입력해주세요"}
+    >
       <FormProvider {...formMethods}>
         <ContentContainer>
           {!type ? (
@@ -40,5 +46,7 @@ const AddTodoModal = ({ open, onClose }: Props) => {
 const ContentContainer = styled.div`
   overflow: hidden;
 `;
+
+const CustomModal = styled(Modal)``;
 
 export default AddTodoModal;

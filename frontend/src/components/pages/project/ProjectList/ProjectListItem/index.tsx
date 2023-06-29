@@ -1,16 +1,23 @@
 import { Project } from "@/models/Project";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 import colors from "material-colors";
-import React from "react";
 
-type Props = {} & Project;
+type Props = {
+  timeLeft: number;
+} & Project;
 
-const ProjectListItem = ({ title, goalText }: Props) => {
+const ProjectListItem = ({ title, timeLeft, goalText }: Props) => {
   return (
     <Container>
       <div className="project-title">{title}</div>
       <div className="project-goal-text">{goalText}</div>
-      <div className="project-link">프로젝트 바로가기</div>
+      <div className="project-metadata-container">
+        <div className="project-time-left">1개월 2일 남음</div>
+        <motion.button className="project-link">
+          프로젝트 바로가기
+        </motion.button>
+      </div>
     </Container>
   );
 };
@@ -33,6 +40,16 @@ const Container = styled.li`
     color: ${colors.grey[800]};
   }
 
+  .project-metadata-container {
+    display: flex;
+    justify-content: space-between;
+
+    .project-time-left {
+      font-size: 0.625rem;
+      color: ${colors.grey[600]};
+    }
+  }
+
   .project-goal-text {
     font-size: 0.75rem;
     font-weight: 400;
@@ -41,8 +58,11 @@ const Container = styled.li`
   }
 
   .project-link {
-    font-size: 0.75rem;
+    font-size: 10px;
     text-align: right;
+    border-radius: 8px;
+    border: 0;
+    padding: 4px 6px;
   }
 `;
 

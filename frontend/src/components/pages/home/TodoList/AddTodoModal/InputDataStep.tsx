@@ -7,6 +7,8 @@ import styled from "@emotion/styled";
 import { PostgrestError } from "@supabase/supabase-js";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import colors from "material-colors";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { useFormContext } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
@@ -66,7 +68,15 @@ const InputDataStep = ({ onClose }: Props) => {
       >
         <InputContainer>
           <Input
-            placeholder="제목을 입력해주세요"
+            placeholder="오늘의 할일 제목을 입력해주세요"
+            label="언제까지 마쳐야 하는 일인가요?"
+            className="input-deadline"
+            {...register("deadline")}
+          >
+            <DatePicker onChange={(e) => console.log(e)} />
+          </Input>
+          <Input
+            placeholder="오늘의 할일 제목을 입력해주세요"
             label="제목"
             className="input-title"
             {...register("title")}
@@ -102,8 +112,12 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 
+  .input-deadline {
+    margin-bottom: 1rem;
+  }
+
   .input-title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .input-content {

@@ -105,7 +105,6 @@ const Container = styled.div`
   }
 
   .main-right-section {
-    max-width: 40%;
     padding: 14px;
     background: #ddedea;
     border-radius: 12px;
@@ -115,17 +114,6 @@ const Container = styled.div`
 
 const Title = styled(Text)`
   margin-bottom: 20px;
-`;
-
-const TodayTodoList = styled.ul`
-  margin: 1rem 0 1rem 0;
-`;
-
-const CTAButton = styled(Button)`
-  margin-top: auto;
-  display: block;
-  position: sticky;
-  bottom: 0;
 `;
 
 export default Home;
