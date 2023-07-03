@@ -1,13 +1,21 @@
 export type TodoCategory = "생활" | "취미" | "학습";
 export type TodoType = "일반" | "중요" | "긴급";
 
+export enum Priority {
+  매우_낮음 = 1,
+  낮음,
+  보통,
+  높음,
+  매우_높음,
+}
+
 export type Todo = {
   id?: string;
   title: string;
   description: string;
   type: TodoType;
   category: TodoCategory;
-  priority?: number;
+  priority?: Priority;
   complete?: boolean;
   createdAt?: string;
   updatedAt?: string;

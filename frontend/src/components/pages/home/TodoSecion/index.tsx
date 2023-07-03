@@ -5,8 +5,8 @@ import styled from "@emotion/styled";
 import colors from "material-colors";
 import { useState } from "react";
 
+import TodoListItem from "../../../common/TodoListItem";
 import CompletedTodoListItem from "../TodoList/CompletedTodoListItem";
-import TodoListItem from "../TodoList/TodoListItem";
 
 type Props = {
   todoList: Todo[];

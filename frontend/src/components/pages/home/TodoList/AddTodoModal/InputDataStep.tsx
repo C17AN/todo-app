@@ -1,4 +1,5 @@
 import Button from "@/components/common/Button";
+import DeadlinePicker from "@/components/common/DeadlinePicker";
 import Input from "@/components/common/Input";
 import TextArea from "@/components/common/TextArea";
 import { Todo } from "@/models/Todo";
@@ -73,7 +74,11 @@ const InputDataStep = ({ onClose }: Props) => {
             className="input-deadline"
             {...register("deadline")}
           >
-            <DatePicker onChange={(e) => console.log(e)} />
+            <DeadlinePicker
+              locale={"ko-KR"}
+              onChange={(e) => console.log(e)}
+              placeholderText="마감일정을 정해주세요"
+            />
           </Input>
           <Input
             placeholder="오늘의 할일 제목을 입력해주세요"

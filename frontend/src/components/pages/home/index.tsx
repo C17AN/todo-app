@@ -6,12 +6,12 @@ import styled from "@emotion/styled";
 import colors from "material-colors";
 import { useState } from "react";
 
+import TodoListItem from "../../common/TodoListItem";
 import ImportantTodoSection from "./ImportantTodoSection";
 import MonthlyProgressSection from "./MonthlyProgressSection";
 import ProgressBar from "./ProgressBar";
 import ProjectSection from "./ProjectSection";
 import AddTodoModal from "./TodoList/AddTodoModal";
-import TodoListItem from "./TodoList/TodoListItem";
 import TodoSection from "./TodoSecion";
 
 const Home = () => {
