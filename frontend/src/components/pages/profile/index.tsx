@@ -20,7 +20,10 @@ const Profile = (props: Props) => {
         >
           {session?.user.user_metadata.name}
         </Text>
-        <Text typography="section-description">계획적인 직장인</Text>
+        <div className="level-container">
+          <Text typography="p">LV 5.</Text>
+          <Text typography="section-description">계획적인 직장인</Text>
+        </div>
       </div>
       <ul className="menu-list">
         <ListRow
@@ -61,6 +64,11 @@ const Container = styled.div`
 
   .section-title {
     margin-bottom: 4px;
+  }
+
+  .level-container {
+    display: flex;
+    align-items: center;
   }
 
   .menu-list-item {
