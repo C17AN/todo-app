@@ -4,7 +4,7 @@ import { Priority, type Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
 import { AnimatePresence, motion } from "framer-motion";
 import colors from "material-colors";
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes, useMemo, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 import TodoDetailFullModal from "./TodoDetailFullModal";
@@ -55,11 +55,7 @@ const TodoListItem = ({
     }
   };
 
-  const {
-    backgroundColor: chipBackgroundColor,
-    color: chipColor,
-    text: chipText,
-  } = getChipMetadata(priority);
+  const chipMetadata = useMemo(() => getChipMetadata(priority), [priority]);
 
   const handleClick = () => {
     setTodoDetailFullModalOpen(true);
@@ -73,9 +69,14 @@ const TodoListItem = ({
           <div className="todo-item-inner-container">
             <div className="todo-item-top-container">
               <div className="todo-item-countdown">마감까지 53분</div>
-              <Chip backgroundColor={chipBackgroundColor} color={chipColor}>
-                {chipText}
-              </Chip>
+              {priority && (
+                <Chip
+                  backgroundColor={chipMetadata?.backgroundColor}
+                  color={chipMetadata?.color}
+                >
+                  {chipMetadata?.text}
+                </Chip>
+              )}
               <Chip className="chip">진행중</Chip>
             </div>
             <h3 className="todo-item-title">{title}</h3>
