@@ -13,17 +13,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useFormContext } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
-import Select from "react-select";
 
 type Props = {
   onClose: () => void;
 };
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 
 const variant: Variants = {
   hover: {
