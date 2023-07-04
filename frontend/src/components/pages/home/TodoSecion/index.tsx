@@ -25,18 +25,28 @@ const TodoSection = ({ todoList }: Props) => {
 
   return (
     <Container className="main-middle-section">
-      <div className="main-middle-section__title-container">
+      <div className="main-middle-section__header">
+        <div className="main-middle-section__title-container">
+          <Text
+            typography="h3"
+            fontWeight="bold"
+            color={colors.darkText.primary}
+          >
+            다가오는 일정
+          </Text>
+          <ToggleButton
+            onClick={toggleSortByCondition}
+            toggleOptions={["우선순위", "마감일"]}
+          />
+        </div>
         <Text
-          typography="h3"
+          typography="p"
           fontWeight="semibold"
-          color={colors.darkText.primary}
+          className="main-middle-section__description"
+          color={colors.grey[600]}
         >
-          다가오는 일정
+          총 24개의 일정이 있어요.
         </Text>
-        <ToggleButton
-          onClick={toggleSortByCondition}
-          toggleOptions={["우선순위", "마감일"]}
-        />
       </div>
       <ul>
         {todoList.map((todo, index) => {
@@ -50,10 +60,23 @@ const TodoSection = ({ todoList }: Props) => {
 };
 
 const Container = styled.section`
+  background-color: #daeaf6a0;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  .main-middle-section__header {
+    padding: 0 0 1rem 0;
+  }
+
   .main-middle-section__title-container {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 0.375rem;
+
+    .main-middle-section__description {
+      margin-bottom: 1.25rem;
+      padding: 0.25rem;
+    }
 
     .sortby-condition-button {
       margin-left: auto;

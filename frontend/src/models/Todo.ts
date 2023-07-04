@@ -1,5 +1,6 @@
 export type TodoCategory = "생활" | "취미" | "학습";
 export type TodoType = "일반" | "중요" | "긴급";
+export type Tag = "약속" | "계획" | "일정";
 
 export enum Priority {
   매우_낮음 = 1,
@@ -17,10 +18,12 @@ export type Todo = {
   category: TodoCategory;
   priority?: Priority;
   complete?: boolean;
+  place?: string;
   createdAt?: string;
   updatedAt?: string;
   deadline?: Date;
   point?: number;
+  tag?: Tag;
 };
 
 // 포인트 (예시)

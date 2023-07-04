@@ -22,15 +22,18 @@ const Home = () => {
 
   return (
     <Container>
-      <Title
-        typography="h3"
-        color={colors.darkText.primary}
-        fontWeight="semibold"
-      >
-        안녕하세요 {session?.user.user_metadata.name}님,
-        <br />
-        오늘의 하루는 어떠셨나요?
-      </Title>
+      <section className="main-header-section">
+        <Title
+          typography="h3"
+          color={colors.darkText.primary}
+          fontWeight="semibold"
+        >
+          안녕하세요 {session?.user.user_metadata.name}님,
+          <br />
+          오늘의 하루는 어떠셨나요?
+        </Title>
+        <div></div>
+      </section>
       <MonthlyProgressSection />
       <section className="main-top-section">
         <section className="main-left-section">
@@ -82,7 +85,7 @@ const Container = styled.div`
   .main-top-section {
     gap: 10px;
     display: flex;
-    margin-bottom: 1.5rem;
+    margin-bottom: 10px;
     min-height: 40vh;
   }
 

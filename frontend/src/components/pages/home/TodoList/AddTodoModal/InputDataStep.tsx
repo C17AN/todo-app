@@ -1,6 +1,7 @@
 import Button from "@/components/common/Button";
 import DeadlinePicker from "@/components/common/DeadlinePicker";
 import Input from "@/components/common/Input";
+import TagSelect from "@/components/common/TagSelect";
 import TextArea from "@/components/common/TextArea";
 import { Todo } from "@/models/Todo";
 import { uploadTodo } from "@/remotes/todo";
@@ -83,7 +84,7 @@ const InputDataStep = ({ onClose }: Props) => {
             <DeadlinePicker
               locale={"ko-KR"}
               onChange={(e) => console.log(e)}
-              placeholderText="마감일정을 정해주세요"
+              placeholderText="마감 일정을 정해주세요"
             />
           </Input>
           <Input
@@ -111,7 +112,7 @@ const InputDataStep = ({ onClose }: Props) => {
             {...register("point")}
           /> */}
           <Input label="태그" className="input-tag" {...register("tag")}>
-            <Select placeholder="태그를 선택해주세요" options={options} />
+            <TagSelect />
           </Input>
         </InputContainer>
         <Button
