@@ -21,6 +21,7 @@ export type Todo = {
   place?: string;
   createdAt?: string;
   updatedAt?: string;
+  startTime?: Date;
   deadline?: Date;
   point?: number;
   tag?: Tag;

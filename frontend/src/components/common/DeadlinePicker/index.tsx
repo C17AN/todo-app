@@ -1,35 +1,45 @@
+import { formatDateToMMddttmmss } from "@/utils/formatter/formatDateToMMDDttmmss";
 import React, { ComponentProps, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "./DeadlinePicker.scss";
 
 interface Props extends ComponentProps<typeof DatePicker> {
-  onStartDateChange: () => {};
-  onEndDateChange: () => {};
+  onStartDateChange: (value: Date) => {};
+  onEndDateChange: (value: Date) => {};
 }
 
 const DeadlinePicker = ({
+  startDate,
+  endDate,
   onStartDateChange,
   onEndDateChange,
   ...rest
 }: Props) => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [localStartDate, setLocalStartDate] = useState(startDate || new Date());
+  const [localEndDate, setLocalEndDate] = useState(endDate || new Date());
 
-  const handleStartDateChange = () => {};
+  const handleStartDateChange = (selectedDate: Date) => {
+    setLocalStartDate(() => selectedDate);
+    onStartDateChange(selectedDate);
+  };
 
-  const handleEndDateChange = () => {};
+  const handleEndDateChange = (selectedDate: Date) => {
+    setLocalEndDate(() => selectedDate);
+    onEndDateChange(selectedDate);
+  };
 
   return (
     <>
       <DatePicker
-        onChange={onStartDateChange}
+        onChange={handleStartDateChange}
         showTimeSelect
+        value={formatDateToMMddttmmss(new Date(localStartDate))}
         timeFormat="HH:mm"
         timeIntervals={30}
       />
       <DatePicker
-        onChange={onEndDateChange}
+        onChange={handleEndDateChange}
         showTimeSelect
         timeFormat="HH:mm"
         timeIntervals={30}

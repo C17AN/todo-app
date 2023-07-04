@@ -1,6 +1,7 @@
-import React, { HTMLAttributes } from "react";
-import style from "./ListRow.module.scss";
 import cx from "classnames";
+import { HTMLAttributes } from "react";
+
+import style from "./ListRow.module.scss";
 
 interface Props extends HTMLAttributes<HTMLLIElement> {
   title?: string;

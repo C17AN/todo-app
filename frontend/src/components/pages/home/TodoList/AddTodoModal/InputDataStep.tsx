@@ -9,6 +9,7 @@ import styled from "@emotion/styled";
 import { PostgrestError } from "@supabase/supabase-js";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import colors from "material-colors";
+import { useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFormContext } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
@@ -38,7 +39,7 @@ const variant: Variants = {
 };
 
 const InputDataStep = ({ onClose }: Props) => {
-  const { register, handleSubmit } = useFormContext();
+  const { register, handleSubmit, setValue, watch } = useFormContext<Todo>();
   const { mutate, isLoading } = useMutation(uploadTodo, {
     onSuccess() {
       toast.success("새로운 일정이 등록되었어요!");
@@ -52,6 +53,14 @@ const InputDataStep = ({ onClose }: Props) => {
       }
     },
   });
+
+  // Note:
+  useEffect(() => {
+    register("startTime");
+    register("deadline");
+  }, []);
+
+  const [startTime, deadline] = watch(["startTime", "deadline"]);
 
   const submitTodo = async (data: Todo) => {
     const { title, type, description, category } = data;
@@ -76,6 +85,9 @@ const InputDataStep = ({ onClose }: Props) => {
           >
             <DeadlinePicker
               locale={"ko-KR"}
+              startDate={startTime}
+              endDate={deadline}
+              onStartDateChange={(value) => setValue("startTime", value)}
               onChange={(e) => console.log(e)}
               placeholderText="마감 일정을 정해주세요"
             />
