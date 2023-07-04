@@ -5,7 +5,7 @@ import { Priority, type Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
 import { AnimatePresence, motion } from "framer-motion";
 import colors from "material-colors";
-import { HTMLAttributes, useMemo, useState } from "react";
+import { HTMLAttributes, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 import TodoDetailFullModal from "./TodoDetailFullModal";
@@ -42,24 +42,32 @@ const TodoListItem = ({
     <>
       <TodoListItemContainer onClick={handleClick} {...handlers}>
         <div className="todo-item-container">
-          <Checkbox onChange={toggleComplete} />
+          {/* <Checkbox onChange={toggleComplete} /> */}
           <div className="todo-item-inner-container">
-            <div className="todo-item-top-container">
-              <div className="todo-item-countdown">마감까지 53분</div>
-              {priority && (
-                <Chip
-                  backgroundColor={chipMetadata?.backgroundColor}
-                  color={chipMetadata?.color}
-                >
-                  {chipMetadata?.text}
-                </Chip>
-              )}
-              <Chip className="chip">진행중</Chip>
+            <div className="todo-item-top-area">
+              <div className="todo-item-top-container">
+                <div className="todo-item-countdown">마감까지 53분</div>
+                <div className="todo-item-chip-container">
+                  {priority && (
+                    <Chip
+                      backgroundColor={chipMetadata?.backgroundColor}
+                      color={chipMetadata?.color}
+                    >
+                      {chipMetadata?.text}
+                    </Chip>
+                  )}
+                  <Chip>진행중</Chip>
+                </div>
+              </div>
+              <h3 className="todo-item-title">{title}</h3>
+              <p className="todo-item-summary">{description}</p>
             </div>
-            <h3 className="todo-item-title">{title}</h3>
-            {/* <p className="todo-item-summary">{description}</p> */}
+            <div className="todo-item-bottom-area">
+              <div>SK Supex Hall</div>
+            </div>
           </div>
         </div>
+
         <AnimatePresence>
           {completeOverlayVisible && (
             <motion.div
@@ -90,14 +98,14 @@ const TodoListItem = ({
 };
 
 const TodoListItemContainer = styled.li`
-  padding: 8px 0;
   list-style: none;
-  background-color: ${colors.grey[50]};
-  padding: 12px;
+  background-color: ${colors.white};
+  padding-top: 12px;
   margin-bottom: 8px;
   border-radius: 8px;
   position: relative;
   width: 100%;
+  border: 1px solid ${colors.grey[200]};
 
   .todo-item-container {
     display: flex;
@@ -105,7 +113,6 @@ const TodoListItemContainer = styled.li`
   }
 
   .todo-item-inner-container {
-    margin-left: 8px;
     width: 100%;
 
     .todo-item-top-container {
@@ -125,7 +132,7 @@ const TodoListItemContainer = styled.li`
 
     .todo-item-title {
       margin-top: 4px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-size: 0.8rem;
       font-weight: 700;
       color: ${colors.grey[800]};
@@ -133,6 +140,32 @@ const TodoListItemContainer = styled.li`
 
     .todo-item-summary {
       font-size: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .todo-item-chip-container {
+      margin-left: auto;
+
+      .chip {
+        margin-right: 10px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .todo-item-top-area {
+      padding: 0 12px;
+    }
+
+    .todo-item-bottom-area {
+      display: flex;
+      align-items: center;
+      font-size: 0.675rem;
+      padding: 8px 0 8px 12px;
+      border-top: 1px solid ${colors.grey[300]};
+      color: ${colors.grey[600]};
     }
   }
 

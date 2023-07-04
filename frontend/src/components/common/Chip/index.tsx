@@ -22,7 +22,7 @@ const Chip = ({
 
   return (
     <div
-      className={cx(style.chip, style[typeClassName], className)}
+      className={cx(style.chip, style[typeClassName], "chip", className)}
       style={{ backgroundColor, color }}
     >
       {children}
