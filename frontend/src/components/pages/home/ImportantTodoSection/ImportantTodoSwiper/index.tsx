@@ -1,11 +1,12 @@
 import { Todo } from "@/models/Todo";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import ImportantTodoListItem from "../ImportantTodoListItem";
 import styled from "@emotion/styled";
-import "./importantTodoSwiper.scss";
+import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import ImportantTodoListItem from "../ImportantTodoListItem";
+import "./importantTodoSwiper.scss";
 
 type Props = {
   todoList: Todo[];

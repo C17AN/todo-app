@@ -1,13 +1,17 @@
 import Button from "@/components/common/Button";
 import Modal from "@/components/common/Modal";
+import { usePriorityChipMetadata } from "@/hooks/usePriorityChipMetadata";
 import { Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
 import colors from "material-colors";
 import { ComponentProps } from "react";
 
+import Chip from "../Chip";
+
 interface Props extends ComponentProps<typeof Modal> {
   title: Todo["title"];
   description: Todo["description"];
+  priority: Todo["priority"];
 }
 
 const TodoDetailFullModal = ({
@@ -15,11 +19,17 @@ const TodoDetailFullModal = ({
   onClose,
   title,
   description,
+  priority,
   ...rest
 }: Props) => {
+  const chipMetadata = usePriorityChipMetadata(priority);
+
   return (
     <Modal open={open} onClose={onClose} {...rest}>
-      <ModalTitle className="modal-title">{title}</ModalTitle>
+      <TitleContainer>
+        <ModalTitle className="modal-title">{title}</ModalTitle>
+        {priority && <Chip>{chipMetadata?.text}</Chip>}
+      </TitleContainer>
       <div>{description}</div>
       <ButtonContainer>
         <Button size="tiny" onClick={() => {}}>
@@ -29,6 +39,10 @@ const TodoDetailFullModal = ({
     </Modal>
   );
 };
+
+const TitleContainer = styled.div`
+  display: flex;
+`;
 
 const ModalTitle = styled.h3`
   color: ${colors.darkText.primary};

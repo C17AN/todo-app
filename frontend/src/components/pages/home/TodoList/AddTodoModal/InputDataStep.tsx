@@ -8,15 +8,21 @@ import styled from "@emotion/styled";
 import { PostgrestError } from "@supabase/supabase-js";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import colors from "material-colors";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useFormContext } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
+import Select from "react-select";
 
 type Props = {
   onClose: () => void;
 };
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 const variant: Variants = {
   hover: {
@@ -93,11 +99,20 @@ const InputDataStep = ({ onClose }: Props) => {
             {...register("description")}
           />
           <TextArea
+            placeholder="우선순위를 입력해주세요"
+            label="우선순위"
+            className="input-content"
+            {...register("description")}
+          />
+          {/* <TextArea
             placeholder="부여할 포인트를 입력해주세요"
             label="포인트"
             className="input-content"
             {...register("point")}
-          />
+          /> */}
+          <Input label="태그" className="input-tag" {...register("tag")}>
+            <Select placeholder="태그를 선택해주세요" options={options} />
+          </Input>
         </InputContainer>
         <Button
           size="cta"

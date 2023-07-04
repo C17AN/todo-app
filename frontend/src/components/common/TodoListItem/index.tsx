@@ -1,5 +1,6 @@
 import Checkbox from "@/components/common/CheckBox";
 import Chip from "@/components/common/Chip";
+import { usePriorityChipMetadata } from "@/hooks/usePriorityChipMetadata";
 import { Priority, type Todo } from "@/models/Todo";
 import styled from "@emotion/styled";
 import { AnimatePresence, motion } from "framer-motion";
@@ -31,31 +32,7 @@ const TodoListItem = ({
     onSwipedRight: () => setCompleteOverlayVisible(false),
   });
 
-  const getChipMetadata: (priority: Todo["priority"]) => {
-    color: string;
-    backgroundColor: string;
-    text: string;
-  } | null = (priority) => {
-    if (!priority) return null;
-    switch (priority) {
-      case Priority.매우_낮음:
-        return {
-          backgroundColor: colors.amber[300],
-          color: colors.white,
-          text: "매우 낮음",
-        };
-      case Priority.낮음:
-        return {
-          backgroundColor: colors.cyan[300],
-          color: colors.white,
-          text: "낮음",
-        };
-      default:
-        return null;
-    }
-  };
-
-  const chipMetadata = useMemo(() => getChipMetadata(priority), [priority]);
+  const chipMetadata = usePriorityChipMetadata(priority);
 
   const handleClick = () => {
     setTodoDetailFullModalOpen(true);
