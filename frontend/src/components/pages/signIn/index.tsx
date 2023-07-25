@@ -66,10 +66,13 @@ const SignIn = () => {
 };
 
 const Container = styled.div`
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 4rem 2rem 2rem 2rem;
-  min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
 `;
 
 const Title = styled.h1`
@@ -88,13 +91,17 @@ const LoginInfoInput = styled(Input)`
 `;
 
 const LoginButton = styled(Button)`
-  margin-top: auto;
   margin-bottom: 12px;
+  width: 100%;
+  margin-top: auto;
+  display: block;
+  left: 0;
 `;
 
 const SignUpLink = styled(Link)`
   text-decoration: none;
   font-weight: 600;
+  margin-bottom: 100px;
   color: ${colors.darkText.secondary};
 `;
 
