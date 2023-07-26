@@ -5,6 +5,7 @@ import { SignInParams, signIn } from "@/remotes/signIn";
 import styled from "@emotion/styled";
 import { AuthError } from "@supabase/supabase-js";
 import colors from "material-colors";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation } from "react-query";
@@ -31,6 +32,14 @@ const SignIn = () => {
     const { email, password } = getValues();
     mutate({ email, password });
   };
+
+  useEffect(() => {
+    window.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleSignIn();
+      }
+    });
+  }, []);
 
   return (
     <Container>

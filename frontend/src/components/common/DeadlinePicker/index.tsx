@@ -1,5 +1,7 @@
 import { formatDateToMMddttmmss } from "@/utils/formatter/formatDateToMMDDttmmss";
-import React, { ComponentProps, useState } from "react";
+import styled from "@emotion/styled";
+import colors from "material-colors";
+import { ComponentProps, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "./DeadlinePicker.scss";
@@ -30,22 +32,45 @@ const DeadlinePicker = ({
   };
 
   return (
-    <>
-      <DatePicker
-        onChange={handleStartDateChange}
-        showTimeSelect
-        value={formatDateToMMddttmmss(new Date(localStartDate))}
-        timeFormat="HH:mm"
-        timeIntervals={30}
-      />
-      <DatePicker
-        onChange={handleEndDateChange}
-        showTimeSelect
-        timeFormat="HH:mm"
-        timeIntervals={30}
-      />
-    </>
+    <Container>
+      <DatePickerWrapper>
+        <Label>시작시간</Label>
+        <DatePicker
+          onChange={handleStartDateChange}
+          showTimeSelect
+          value={formatDateToMMddttmmss(new Date(localStartDate))}
+          timeFormat="HH:mm"
+          timeIntervals={30}
+        />
+      </DatePickerWrapper>
+      <DatePickerWrapper>
+        <Label>종료시간</Label>
+        <DatePicker
+          onChange={handleEndDateChange}
+          showTimeSelect
+          timeFormat="HH:mm"
+          timeIntervals={30}
+        />
+      </DatePickerWrapper>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const DatePickerWrapper = styled.div`
+  &:first-of-type {
+    margin-right: 12px;
+  }
+`;
+
+const Label = styled.label`
+  font-size: 12px;
+  display: block;
+  margin-bottom: 4px;
+  color: ${colors.darkText.primary};
+`;
 
 export default DeadlinePicker;

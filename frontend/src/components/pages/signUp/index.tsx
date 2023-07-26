@@ -1,7 +1,7 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import Text from "@/components/common/Text";
-import { SignUpParams, signUp, useSignUp } from "@/remotes/signUp";
+import { SignUpParams, signUp } from "@/remotes/signUp";
 import styled from "@emotion/styled";
 import colors from "material-colors";
 import { useForm } from "react-hook-form";

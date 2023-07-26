@@ -18,26 +18,26 @@ const Input = forwardRef<any, Props>(
     ref
   ) => {
     return (
-      <>
+      <div className={cx(className)}>
         {label && <p className={style["input-label"]}>{label}</p>}
         {children ? (
           children
         ) : (
           <input
             ref={ref}
-            className={cx(
-              style.input,
-              error && style["input-error"],
-              className
-            )}
+            className={cx(style.input, error && style["input-error"])}
             disabled={disabled}
             autoComplete="off"
             {...rest}
           />
         )}
         {bottomText &&
-          (typeof bottomText === "string" ? <p>{bottomText}</p> : bottomText)}
-      </>
+          (typeof bottomText === "string" ? (
+            <p className={style["bottom-text"]}>{bottomText}</p>
+          ) : (
+            bottomText
+          ))}
+      </div>
     );
   }
 );

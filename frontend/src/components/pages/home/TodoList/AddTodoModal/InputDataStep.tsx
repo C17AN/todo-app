@@ -77,12 +77,7 @@ const InputDataStep = ({ onClose }: Props) => {
         animate="fadeIn"
       >
         <InputContainer>
-          <Input
-            placeholder="오늘의 할일 제목을 입력해주세요"
-            label="언제까지 마쳐야 하는 일인가요?"
-            className="input-deadline"
-            {...register("deadline")}
-          >
+          <Input className="input-deadline" {...register("deadline")}>
             <DeadlinePicker
               locale={"ko-KR"}
               startDate={startTime}
